@@ -94,5 +94,9 @@ export function bytesToFloat64(bytes: Uint8Array) {
 }
 
 export function bytesToStr(bytes: Uint8Array) {
-   return 'Unimplemented';
+   var result = "";
+   for (const byte of bytes) {
+      result = String.fromCharCode(byte) + result;
+   }
+   return result;
 }
