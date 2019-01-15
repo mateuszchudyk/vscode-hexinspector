@@ -29,7 +29,50 @@ export function hexToBytes(str: string) {
 }
 
 export function bytesToDec(bytes: Uint8Array) {
-   return 'Unimplemented';
+   var dec = new Uint8Array(3 * bytes.length);
+   for (let i = 0; i < bytes.length; i++) {
+      var temp = new Uint32Array(3 * bytes.length);
+      temp[0] = bytes[i] % 10;
+      temp[1] = (bytes[i] / 10) % 10;
+      temp[2] = (bytes[i] / 100) % 10;
+
+      for (let j = 0; j < i; j++) {
+         for (let k = 0; k < temp.length; k++) {
+            temp[k] *= 256;
+         }
+
+         for (let k = 0; k < temp.length - 1; k++) {
+            if (temp[k] >= 10) {
+               temp[k + 1] += temp[k] / 10;
+               temp[k] %= 10;
+            }
+         }
+      }
+
+      for (let j = 0; j < dec.length; j++) {
+         dec[j] += temp[j];
+      }
+      for (let j = 0; j < dec.length - 1; j++) {
+         if (dec[j] >= 10) {
+            dec[j + 1] += dec[j] / 10;
+            dec[j] %= 10;
+         }
+      }
+   }
+
+   var length = 0;
+   for (let j = 0; j < dec.length; j++) {
+      if (dec[j] != 0) {
+         length = j;
+      }
+   }
+
+   var result = "";
+   for (let j = 0; j <= length; j++) {
+      result = dec[j] + result;
+   }
+
+   return result;
 }
 
 export function bytesToBin(bytes: Uint8Array) {
