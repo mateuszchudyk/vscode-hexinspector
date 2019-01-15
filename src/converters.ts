@@ -86,11 +86,42 @@ export function bytesToBin(bytes: Uint8Array) {
 }
 
 export function bytesToFloat32(bytes: Uint8Array) {
-   return 'Unimplemented';
+   if (bytes.length > 4) {
+      return '-';
+   }
+
+   var sign = bytes.length == 4 ? bytes[3] >> 7 : 0;
+   var exponent =
+      ((bytes.length == 4 ? bytes[3] & 0x7f : 0) << 1) +
+      (bytes.length >= 3 ? bytes[2] >> 7 : 0);
+   var mantissa =
+      ((bytes.length >= 3 ? bytes[2] & 0x7f : 0) << 16) +
+      ((bytes.length >= 2 ? bytes[1] : 0) << 8) +
+      ((bytes.length >= 1 ? bytes[0] : 0));
+
+   return (sign ? -1.0 : 1.0) * Math.pow(2, exponent - 127) * (1 + mantissa / (1 << 23));
 }
 
 export function bytesToFloat64(bytes: Uint8Array) {
-   return 'Unimplemented';
+   if (bytes.length > 8) {
+      return '-';
+   }
+
+   var sign = bytes.length == 8 ? bytes[7] >> 7 : 0;
+   var exponent =
+      ((bytes.length == 8 ? bytes[7] & 0x7f : 0) << 4) +
+      (bytes.length >= 7 ? bytes[6] >> 4 : 0);
+   var mantissa_hi =
+      ((bytes.length >= 7 ? bytes[6] & 0xf : 0) << 16) +
+      ((bytes.length >= 6 ? bytes[5] : 0) << 8) +
+      (bytes.length >= 5 ? bytes[4] : 0);
+   var mantissa_low =
+      (bytes.length >= 4 ? bytes[3] : 0) +
+      (bytes.length >= 3 ? bytes[2] : 0) / (1 << 8) +
+      (bytes.length >= 2 ? bytes[1] : 0) / (1 << 16) +
+      (bytes.length >= 1 ? bytes[0] : 0) / (1 << 24);
+
+   return (sign ? -1.0 : 1.0) * Math.pow(2, exponent - 1023) * (1 + mantissa_hi / (1 << 20) + mantissa_low / (1 << 28));
 }
 
 export function bytesToStr(bytes: Uint8Array) {
