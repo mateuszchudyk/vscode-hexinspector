@@ -1,0 +1,18 @@
+{ 
+	"scopeName": "source.hexinspector",
+    "fileTypes": [ "hexinspector" ],
+    "patterns": [
+		{
+			"match": "Hex Inspector:",
+			"name": "markup.heading.2.html"
+		},
+		{
+			"match": "0x([0-9a-fA-F]+)",
+			"name": "entity.name.class"
+		},
+		{
+			"match": "(Decimal|Binary|Float32|Float64|Chars)",
+			"name": "entity.name.type"
+		}
+	]
+}

@@ -20,7 +20,7 @@ export function activate(context: vscode.ExtensionContext) {
                     'Chars:    ' + converters.bytesToStr(bytes)      + '\n' +
                     '';
 
-                return new vscode.Hover(message);
+                return new vscode.Hover({language: 'hexinspector', value: message});
             }
         }
     });

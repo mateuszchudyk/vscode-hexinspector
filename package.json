@@ -24,6 +24,18 @@
 	"activationEvents": [
 		"*"
 	],
+	"contributes": {
+		"languages": [{
+			"id": "hexinspector"
+		}],
+		"grammars": [
+			{
+				"language": "hexinspector",
+				"scopeName": "source.hexinspector",
+				"path": "./syntaxes/hexinspector.json"
+			}
+		]
+	},
 	"main": "./out/extension.js",
 	"scripts": {
 		"vscode:prepublish": "npm run compile",
