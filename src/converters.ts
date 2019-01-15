@@ -33,7 +33,13 @@ export function bytesToDec(bytes: Uint8Array) {
 }
 
 export function bytesToBin(bytes: Uint8Array) {
-   return 'Unimplemented';
+   var result = "";
+   for (const byte of bytes) {
+      for (let i = 0; i < 8; i++) {
+         result = ((byte >> i) % 2) + result;
+      }
+   }
+   return result;
 }
 
 export function bytesToFloat32(bytes: Uint8Array) {
