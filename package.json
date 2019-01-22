@@ -1,20 +1,20 @@
 {
 	"name": "hexinspector",
 	"displayName": "HexInspector",
-	"description": "",
+	"description": "Show conversions of the pointed hexadecimal value",
 	"version": "0.0.1",
-	"publisher": "Mateusz Chudyk",
+	"publisher": "mateuszchudyk",
 	"license": "MIT",
 	"repository": {
-        "type": "git",
-        "url": "https://github.com/mateuszchudyk/vscode-hexinspector"
+		"type": "git",
+		"url": "https://github.com/mateuszchudyk/vscode-hexinspector"
 	},
 	"keywords": [
-        "hex",
+		"hex",
 		"inspector",
 		"hover",
 		"converter"
-    ],
+	],
 	"engines": {
 		"vscode": "^1.30.0"
 	},

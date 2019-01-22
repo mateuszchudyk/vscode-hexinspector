@@ -1,7 +1,7 @@
 { 
 	"scopeName": "source.hexinspector",
-    "fileTypes": [ "hexinspector" ],
-    "patterns": [
+	"fileTypes": [ "hexinspector" ],
+	"patterns": [
 		{
 			"match": "Hex Inspector:",
 			"name": "markup.heading.2.html"
