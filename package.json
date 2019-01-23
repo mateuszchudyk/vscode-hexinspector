@@ -1,7 +1,7 @@
 {
 	"name": "hexinspector",
 	"displayName": "HexInspector",
-	"description": "Show conversions of the pointed hexadecimal value",
+	"description": "Provides fast and easy way to peek a hexadecimal value in different forms",
 	"version": "0.0.1",
 	"publisher": "mateuszchudyk",
 	"license": "MIT",

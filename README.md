@@ -4,14 +4,16 @@
 
 ## Overview
 
-**HexInspector** is a [VS Code] extension displaying a hover with conversions of the pointed hexadecimal value.
+**HexInspector** is an extension for [Visual Studio Code] provides fast and easy way to peek a hexadecimal value in different forms. The extension supports both `Little-Endian` and `Big-Endian` byte order. Hexadecimal values are recognized if they start with `0x` or `#` (e.g. `0x123`, `#1234`)
 
-Supported conversions:
-  - Decimal
+Hexadecimal value is converted to:
+  - Decimal - unsigned and signed (only if the highest bit is set)
   - Binary
   - Float32
   - Float64
   - Char sequence
+
+Extension can be downloaded from the [Marketplace].
 
 ## Screenshot
 
@@ -23,5 +25,6 @@ Supported conversions:
 
 
 
-[VS Code]: https://code.visualstudio.com/
+[Visual Studio Code]: https://code.visualstudio.com/
+[Marketplace]: https://marketplace.visualstudio.com/items?itemName=mateuszchudyk.hexinspector
 [MIT]: LICENSE
