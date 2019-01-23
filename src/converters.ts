@@ -28,7 +28,7 @@ export function hexToBytes(str: string) {
    return result;
 }
 
-export function bytesToDec(bytes: Uint8Array) {
+export function bytesToUnsignedDec(bytes: Uint8Array) {
    var dec = new Uint8Array(3 * bytes.length);
    for (let i = 0; i < bytes.length; i++) {
       var temp = new Uint32Array(3 * bytes.length);
@@ -67,7 +67,7 @@ export function bytesToDec(bytes: Uint8Array) {
       }
    }
 
-   var result = "";
+   var result = '';
    for (let j = 0; j <= length; j++) {
       result = dec[j] + result;
    }
@@ -75,8 +75,14 @@ export function bytesToDec(bytes: Uint8Array) {
    return result;
 }
 
+export function bytesToSignedDec(bytes: Uint8Array) {
+   var sign = bytes[bytes.length - 1] >> 7;
+   bytes[bytes.length - 1] &= 0x7f;
+   return (sign ? '-' : '') + bytesToUnsignedDec(bytes);
+}
+
 export function bytesToBin(bytes: Uint8Array) {
-   var result = "";
+   var result = '';
    for (const byte of bytes) {
       for (let i = 0; i < 8; i++) {
          result = ((byte >> i) % 2) + result;
@@ -125,7 +131,7 @@ export function bytesToFloat64(bytes: Uint8Array) {
 }
 
 export function bytesToStr(bytes: Uint8Array) {
-   var result = "";
+   var result = '';
    for (const byte of bytes) {
       result = String.fromCharCode(byte) + result;
    }

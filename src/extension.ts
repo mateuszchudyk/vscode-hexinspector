@@ -11,7 +11,10 @@ export function activate(context: vscode.ExtensionContext) {
 
             let bytes = converters.hexToBytes(word);
             if (bytes) {
-                let decimal = utils.addThousandsSeparator(converters.bytesToDec(bytes));
+                let unsigned = utils.addThousandsSeparator(converters.bytesToUnsignedDec(bytes));
+                let signed = utils.addThousandsSeparator(converters.bytesToSignedDec(bytes));
+                let decimal = unsigned + (signed != unsigned ? ' / ' + signed : '');
+
                 let binary = utils.addBytesSeparator(converters.bytesToBin(bytes));
 
                 let message =
