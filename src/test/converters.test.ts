@@ -25,6 +25,7 @@ suite('Converters Tests', function () {
     });
 
     test('bytesToUnsignedDec', function() {
+        assert.strictEqual(converters.bytesToUnsignedDec(new Uint8Array([])), '');
         assert.strictEqual(converters.bytesToUnsignedDec(new Uint8Array([0x1])), '1');
         assert.strictEqual(converters.bytesToUnsignedDec(new Uint8Array([0x1, 0x2])), '513');
         assert.strictEqual(converters.bytesToUnsignedDec(new Uint8Array([0x12, 0x34, 0xfc])), '16528402');
@@ -32,6 +33,7 @@ suite('Converters Tests', function () {
     });
 
     test('bytesToSignedDec', function() {
+        assert.strictEqual(converters.bytesToSignedDec(new Uint8Array([])), '');
         assert.strictEqual(converters.bytesToSignedDec(new Uint8Array([0x81])), '-1');
         assert.strictEqual(converters.bytesToSignedDec(new Uint8Array([0x1, 0x82])), '-513');
         assert.strictEqual(converters.bytesToSignedDec(new Uint8Array([0x12, 0x34, 0xfc])), '-8139794');
@@ -47,10 +49,12 @@ suite('Converters Tests', function () {
     });
 
     test('bytesToFloat32', function() {
+        assert.strictEqual(converters.bytesToFloat32(new Uint8Array([])), '-');
         assert.strictEqual(converters.bytesToFloat32(new Uint8Array([0x0, 0x0, 0x20, 0x3e])), 0.15625);
     });
 
     test('bytesToFloat64', function() {
+        assert.strictEqual(converters.bytesToFloat64(new Uint8Array([])), '-');
         assert.strictEqual(converters.bytesToFloat64(new Uint8Array([0x55, 0x55, 0x55, 0x55, 0x55, 0x55, 0xd5, 0x3f])), 0.3333333333333333);
     });
 

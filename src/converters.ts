@@ -29,6 +29,10 @@ export function hexToBytes(str: string) {
 }
 
 export function bytesToUnsignedDec(bytes: Uint8Array) {
+   if (bytes.length == 0) {
+      return '';
+   }
+
    var dec = new Uint8Array(3 * bytes.length);
    for (let i = 0; i < bytes.length; i++) {
       var temp = new Uint32Array(3 * bytes.length);
@@ -76,6 +80,10 @@ export function bytesToUnsignedDec(bytes: Uint8Array) {
 }
 
 export function bytesToSignedDec(bytes: Uint8Array) {
+   if (bytes.length == 0) {
+      return '';
+   }
+
    var sign = bytes[bytes.length - 1] >> 7;
    bytes[bytes.length - 1] &= 0x7f;
    return (sign ? '-' : '') + bytesToUnsignedDec(bytes);
@@ -92,7 +100,7 @@ export function bytesToBin(bytes: Uint8Array) {
 }
 
 export function bytesToFloat32(bytes: Uint8Array) {
-   if (bytes.length > 4) {
+   if (bytes.length > 4 || bytes.length == 0) {
       return '-';
    }
 
@@ -109,7 +117,7 @@ export function bytesToFloat32(bytes: Uint8Array) {
 }
 
 export function bytesToFloat64(bytes: Uint8Array) {
-   if (bytes.length > 8) {
+   if (bytes.length > 8 || bytes.length == 0) {
       return '-';
    }
 
