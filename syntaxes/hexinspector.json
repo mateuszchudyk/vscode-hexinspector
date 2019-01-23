@@ -7,6 +7,10 @@
 			"name": "markup.heading.2.html"
 		},
 		{
+			"match": "(Little Endian|Big Endian)",
+			"name": "entity.name.function"
+		},
+		{
 			"match": "0x([0-9a-fA-F]+)",
 			"name": "entity.name.class"
 		},

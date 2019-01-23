@@ -26,6 +26,17 @@
 		"*"
 	],
 	"contributes": {
+		"configuration": {
+			"type": "object",
+			"title": "HexInspector",
+			"properties": {
+				"hexinspector.endianness": {
+					"type": "boolean",
+					"default": true,
+					"description": "Little Endian (true) or Big Endian (false)?"
+				}
+			}
+		},
 		"languages": [{
 			"id": "hexinspector"
 		}],

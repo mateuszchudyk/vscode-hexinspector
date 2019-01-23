@@ -22,6 +22,26 @@ suite('Converters Tests', function () {
         assert.deepStrictEqual(converters.hexToBytes('#123'), new Uint8Array([0x23, 0x1]));
         assert.deepStrictEqual(converters.hexToBytes('#1234'), new Uint8Array([0x34, 0x12]));
         assert.deepStrictEqual(converters.hexToBytes('#12345678'), new Uint8Array([0x78, 0x56, 0x34, 0x12]));
+
+        assert.strictEqual(converters.hexToBytes('', false), undefined);
+        assert.strictEqual(converters.hexToBytes('0x', false), undefined);
+        assert.deepStrictEqual(converters.hexToBytes('0x0', false), new Uint8Array([0x0]));
+        assert.deepStrictEqual(converters.hexToBytes('0x1', false), new Uint8Array([0x1]));
+        assert.deepStrictEqual(converters.hexToBytes('0x7f', false), new Uint8Array([0x7f]));
+        assert.deepStrictEqual(converters.hexToBytes('0xff', false), new Uint8Array([0xff]));
+        assert.deepStrictEqual(converters.hexToBytes('0x123', false), new Uint8Array([0x1, 0x23]));
+        assert.deepStrictEqual(converters.hexToBytes('0x1234', false), new Uint8Array([0x12, 0x34]));
+        assert.deepStrictEqual(converters.hexToBytes('0x12345678', false), new Uint8Array([0x12, 0x34, 0x56, 0x78]));
+
+        assert.strictEqual(converters.hexToBytes('', false), undefined);
+        assert.strictEqual(converters.hexToBytes('#', false), undefined);
+        assert.deepStrictEqual(converters.hexToBytes('#0', false), new Uint8Array([0x0]));
+        assert.deepStrictEqual(converters.hexToBytes('#1', false), new Uint8Array([0x1]));
+        assert.deepStrictEqual(converters.hexToBytes('#7f', false), new Uint8Array([0x7f]));
+        assert.deepStrictEqual(converters.hexToBytes('#ff', false), new Uint8Array([0xff]));
+        assert.deepStrictEqual(converters.hexToBytes('#123', false), new Uint8Array([0x1, 0x23]));
+        assert.deepStrictEqual(converters.hexToBytes('#1234', false), new Uint8Array([0x12, 0x34]));
+        assert.deepStrictEqual(converters.hexToBytes('#12345678', false), new Uint8Array([0x12, 0x34, 0x56, 0x78]));
     });
 
     test('bytesToUnsignedDec', function() {

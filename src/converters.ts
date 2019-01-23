@@ -2,7 +2,15 @@ function stringReverse(str: string) {
    return str.split('').reverse().join('');
 }
 
-export function hexToBytes(str: string) {
+function switchEndian(bytes: Uint8Array) {
+   var result = new Uint8Array(bytes.length);
+   for (let i = 0; i < result.length; i++) {
+      result[i] = bytes[bytes.length - 1 - i];
+   }
+   return result;
+}
+
+export function hexToBytes(str: string, little_endian: boolean = true) {
    var rules = new Map<string, (str: string) => string>();
 
    rules.set('0x[0-9a-fA-F]+', (str: string) => { return str.substr(2); });
@@ -24,6 +32,10 @@ export function hexToBytes(str: string) {
    var result = new Uint8Array((hex.length + 1) / 2);
    for (let i = 0; i < result.length; i++) {
       result[i] = parseInt(hex[2 * i], 16) + (2 * i + 1 < hex.length ? 16 * parseInt(hex[2 * i + 1], 16) : 0);
+   }
+
+   if (!little_endian) {
+      result = switchEndian(result);
    }
    return result;
 }
