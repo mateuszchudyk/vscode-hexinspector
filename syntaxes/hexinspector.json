@@ -3,7 +3,7 @@
 	"fileTypes": [ "hexinspector" ],
 	"patterns": [
 		{
-			"match": "Hex Inspector:",
+			"match": "HexInspector:",
 			"name": "markup.heading.2.html"
 		},
 		{

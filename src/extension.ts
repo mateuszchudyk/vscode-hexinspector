@@ -2,6 +2,7 @@
 
 import * as vscode from 'vscode';
 import * as converters from './converters';
+import * as utils from './utils';
 
 export function activate(context: vscode.ExtensionContext) {
     var hover = vscode.languages.registerHoverProvider({scheme: '*', language: '*'}, {
@@ -10,11 +11,14 @@ export function activate(context: vscode.ExtensionContext) {
 
             let bytes = converters.hexToBytes(word);
             if (bytes) {
+                let decimal = utils.addThousandsSeparator(converters.bytesToDec(bytes));
+                let binary = utils.addBytesSeparator(converters.bytesToBin(bytes));
+
                 let message =
-                    'Hex Inspector: ' + word                         + '\n' +
+                    'HexInspector: ' + word                          + '\n' +
                     ''                                               + '\n' +
-                    'Decimal:  ' + converters.bytesToDec(bytes)      + '\n' +
-                    'Binary:   ' + converters.bytesToBin(bytes)      + '\n' +
+                    'Decimal:  ' + decimal                           + '\n' +
+                    'Binary:   ' + binary                            + '\n' +
                     'Float32:  ' + converters.bytesToFloat32(bytes)  + '\n' +
                     'Float64:  ' + converters.bytesToFloat64(bytes)  + '\n' +
                     'Chars:    ' + converters.bytesToStr(bytes)      + '\n' +
