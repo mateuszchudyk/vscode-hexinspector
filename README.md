@@ -1,7 +1,3 @@
-<div align='center'>
-  <img src='images/icon.png'>
-</div>
-
 # HexInspector
 
 [![Installs](https://img.shields.io/visual-studio-marketplace/i/mateuszchudyk.hexinspector.svg?colorB=blue&style=for-the-badge)](https://marketplace.visualstudio.com/items?itemName=mateuszchudyk.hexinspector)
@@ -32,10 +28,9 @@ Extension is available on the [Marketplace].
 
 ## License
 
-[MIT]
+MIT
 
 
 
 [Visual Studio Code]: https://code.visualstudio.com/
 [Marketplace]: https://marketplace.visualstudio.com/items?itemName=mateuszchudyk.hexinspector
-[MIT]: LICENSE
