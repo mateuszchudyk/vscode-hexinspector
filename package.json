@@ -2,7 +2,7 @@
 	"name": "hexinspector",
 	"displayName": "HexInspector",
 	"description": "Provides fast and easy way to peek a hexadecimal value in different forms",
-	"version": "0.0.1",
+	"version": "0.0.2",
 	"publisher": "mateuszchudyk",
 	"license": "MIT",
 	"repository": {
