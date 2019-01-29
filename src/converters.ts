@@ -113,7 +113,7 @@ export function bytesToBin(bytes: Uint8Array) {
 
 export function bytesToFloat32(bytes: Uint8Array) {
    if (bytes.length > 4 || bytes.length == 0) {
-      return '-';
+      return '';
    }
 
    var sign = bytes.length == 4 ? bytes[3] >> 7 : 0;
@@ -130,7 +130,7 @@ export function bytesToFloat32(bytes: Uint8Array) {
 
 export function bytesToFloat64(bytes: Uint8Array) {
    if (bytes.length > 8 || bytes.length == 0) {
-      return '-';
+      return '';
    }
 
    var sign = bytes.length == 8 ? bytes[7] >> 7 : 0;

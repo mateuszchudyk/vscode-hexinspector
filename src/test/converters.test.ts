@@ -69,12 +69,12 @@ suite('Converters Tests', function () {
     });
 
     test('bytesToFloat32', function() {
-        assert.strictEqual(converters.bytesToFloat32(new Uint8Array([])), '-');
+        assert.strictEqual(converters.bytesToFloat32(new Uint8Array([])), '');
         assert.strictEqual(converters.bytesToFloat32(new Uint8Array([0x0, 0x0, 0x20, 0x3e])), 0.15625);
     });
 
     test('bytesToFloat64', function() {
-        assert.strictEqual(converters.bytesToFloat64(new Uint8Array([])), '-');
+        assert.strictEqual(converters.bytesToFloat64(new Uint8Array([])), '');
         assert.strictEqual(converters.bytesToFloat64(new Uint8Array([0x55, 0x55, 0x55, 0x55, 0x55, 0x55, 0xd5, 0x3f])), 0.3333333333333333);
     });
 
