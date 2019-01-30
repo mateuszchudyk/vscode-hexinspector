@@ -30,16 +30,16 @@ export function activate(context: vscode.ExtensionContext) {
                 }
 
                 let message =
-                    'HexInspector: ' + word                          + '\n' +
-                    ''                                               + '\n' +
-                    'Decimal:  ' + decimal                           + '\n' +
-                    'Binary:   ' + binary                            + '\n' +
-                    'Float32:  ' + float32                           + '\n' +
-                    'Float64:  ' + float64                           + '\n' +
-                    'Chars:    ' + converters.bytesToStr(bytes)      + '\n' +
-                    'Size:     ' + converters.bytesToSize(bytes)     + '\n' +
-                    ''                                               + '\n' +
-                    endianness                                       + '\n' +
+                    'HexInspector: ' + word + ' (' + bytes.length + 'B)' + '\n' +
+                    ''                                                   + '\n' +
+                    'Decimal:  ' + decimal                               + '\n' +
+                    'Binary:   ' + binary                                + '\n' +
+                    'Float32:  ' + float32                               + '\n' +
+                    'Float64:  ' + float64                               + '\n' +
+                    'Chars:    ' + converters.bytesToStr(bytes)          + '\n' +
+                    'Size:     ' + converters.bytesToSize(bytes)         + '\n' +
+                    ''                                                   + '\n' +
+                    endianness                                           + '\n' +
                     '';
 
                 return new vscode.Hover({language: 'hexinspector', value: message});

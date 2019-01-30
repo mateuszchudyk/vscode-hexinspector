@@ -15,6 +15,10 @@
 			"name": "entity.name.class"
 		},
 		{
+			"match": "[0-9]+B",
+			"name": "entity.name.function"
+		},
+		{
 			"match": "(Decimal|Binary|Float32|Float64|Chars|Size)",
 			"name": "entity.name.type"
 		}
