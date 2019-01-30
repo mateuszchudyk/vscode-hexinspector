@@ -37,9 +37,11 @@
 				}
 			}
 		},
-		"languages": [{
-			"id": "hexinspector"
-		}],
+		"languages": [
+			{
+				"id": "hexinspector"
+			}
+		],
 		"grammars": [
 			{
 				"language": "hexinspector",
