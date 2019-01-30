@@ -82,4 +82,20 @@ suite('Converters Tests', function () {
         assert.strictEqual(converters.bytesToStr(new Uint8Array([])), '');
         assert.strictEqual(converters.bytesToStr(new Uint8Array([0x30, 0x39, 0x20, 0x41, 0x5a, 0x20, 0x61, 0x7a])), 'za ZA 90');
     });
+
+    test('bytesToSize', function() {
+        assert.strictEqual(converters.bytesToSize(new Uint8Array([0])), '0.000 B');
+        assert.strictEqual(converters.bytesToSize(new Uint8Array([0x23, 0x1])), '291.000 B');
+        assert.strictEqual(converters.bytesToSize(new Uint8Array([0x34, 0x12])), '4.551 KiB');
+        assert.strictEqual(converters.bytesToSize(new Uint8Array([0x56, 0x34, 0x12])), '1.138 MiB');
+        assert.strictEqual(converters.bytesToSize(new Uint8Array([0x78, 0x56, 0x34, 0x12])), '291.271 MiB');
+        assert.strictEqual(converters.bytesToSize(new Uint8Array([0x9a, 0x78, 0x56, 0x34, 0x12])), '72.818 GiB');
+        assert.strictEqual(converters.bytesToSize(new Uint8Array([0xbc, 0x9a, 0x78, 0x56, 0x34, 0x12])), '18.204 TiB');
+        assert.strictEqual(converters.bytesToSize(new Uint8Array([0xde, 0xbc, 0x9a, 0x78, 0x56, 0x34, 0x12])), '4.551 PiB');
+        assert.strictEqual(converters.bytesToSize(new Uint8Array([0xff, 0xde, 0xbc, 0x9a, 0x78, 0x56, 0x34, 0x12])), '1.138 EiB');
+        assert.strictEqual(converters.bytesToSize(new Uint8Array([0xed, 0xff, 0xde, 0xbc, 0x9a, 0x78, 0x56, 0x34, 0x12])), '291.271 EiB');
+        assert.strictEqual(converters.bytesToSize(new Uint8Array([0xcb, 0xed, 0xff, 0xde, 0xbc, 0x9a, 0x78, 0x56, 0x34, 0x12])), '72.818 ZiB');
+        assert.strictEqual(converters.bytesToSize(new Uint8Array([0xa0, 0xcb, 0xed, 0xff, 0xde, 0xbc, 0x9a, 0x78, 0x56, 0x34, 0x12])), '18.204 YiB');
+        assert.strictEqual(converters.bytesToSize(new Uint8Array([0xdf, 0x59, 0x37, 0x5f])), '1.488 GiB');
+    });
 });

@@ -15,7 +15,7 @@
 			"name": "entity.name.class"
 		},
 		{
-			"match": "(Decimal|Binary|Float32|Float64|Chars)",
+			"match": "(Decimal|Binary|Float32|Float64|Chars|Size)",
 			"name": "entity.name.type"
 		}
 	]

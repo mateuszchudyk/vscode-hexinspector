@@ -157,3 +157,58 @@ export function bytesToStr(bytes: Uint8Array) {
    }
    return result;
 }
+
+function countBits(bytes: Uint8Array) {
+   let i = bytes.length - 1;
+   while (i >= 0 && bytes[i] == 0) {
+      i--;
+   }
+   if (i == -1) {
+      return 0;
+   }
+   return i * 8 + Math.trunc(Math.log2(bytes[i]) + 1);
+}
+
+function shiftBytes(bytes: Uint8Array, shift: number) {
+   if (!Number.isInteger(shift) || shift < 0) {
+      return undefined;
+   }
+
+   var result = new Uint8Array(bytes.length);
+
+   let bits = shift % 8;
+   for (let i = 0, j = Math.trunc(shift / 8); j < bytes.length; ++i, ++j) {
+      result[i] = bytes[j] >> bits;
+      if (j + 1 < bytes.length) {
+         result[i] += bytes[j + 1] << (8 - bits);
+      }
+   }
+
+   return result;
+}
+
+export function bytesToSize(bytes: Uint8Array) {
+   let prefixes = ['', 'Ki', 'Mi', 'Gi', 'Ti', 'Pi', 'Ei', 'Zi', 'Yi'];
+   let bits = countBits(bytes);
+   let prefix_index = Math.min(prefixes.length - 1, Math.trunc(bits / 10));
+
+   let shifted_bytes = bytes;
+   let right = '.000';
+
+   if (prefix_index == 1) {
+      right = ((shifted_bytes[0] + 256 * (shifted_bytes[1] & 0x3)) / (1 << 10)).toFixed(3).substr(1);
+      shifted_bytes = shiftBytes(shifted_bytes, 10);
+   }
+   else if (prefix_index >= 2) {
+      shifted_bytes = shiftBytes(shifted_bytes, prefix_index * 10 - 16);
+      right = ((shifted_bytes[0] + 256 * shifted_bytes[1]) / (1 << 16)).toFixed(3).substr(1);
+      shifted_bytes = shifted_bytes.slice(2);
+   }
+
+   let left = bytesToUnsignedDec(shifted_bytes);
+   if (left == '') {
+      left = '0';
+   }
+
+   return left + right + ' ' + prefixes[prefix_index] + 'B';
+}

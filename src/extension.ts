@@ -37,6 +37,7 @@ export function activate(context: vscode.ExtensionContext) {
                     'Float32:  ' + float32                           + '\n' +
                     'Float64:  ' + float64                           + '\n' +
                     'Chars:    ' + converters.bytesToStr(bytes)      + '\n' +
+                    'Size:     ' + converters.bytesToSize(bytes)     + '\n' +
                     ''                                               + '\n' +
                     endianness                                       + '\n' +
                     '';
