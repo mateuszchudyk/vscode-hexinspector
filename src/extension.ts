@@ -45,12 +45,12 @@ export function activate(context: vscode.ExtensionContext) {
                     'HexInspector: ' + word + ' (' + length + 'B)'      + '\n' +
                     ''                                                  + '\n' +
                     'Decimal:  ' + asDecimal                            + '\n' +
+                    'Size:     ' + asSize                               + '\n' +
                     'Binary:   ' + asBinary                             + '\n' +
                     'Float16:  ' + (asFloat16 == '' ? '-' : asFloat16)  + '\n' +
                     'Float32:  ' + (asFloat32 == '' ? '-' : asFloat32)  + '\n' +
                     'Float64:  ' + (asFloat64 == '' ? '-' : asFloat64)  + '\n' +
                     'Chars:    ' + asCharSequence                       + '\n' +
-                    'Size:     ' + asSize                               + '\n' +
                     ''                                                  + '\n' +
                     endianness                                          + '\n' +
                     '';
