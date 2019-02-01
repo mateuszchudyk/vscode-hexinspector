@@ -70,7 +70,22 @@ suite('Converters Tests', function () {
 
     test('bytesToFloat32', function() {
         assert.strictEqual(converters.bytesToFloat32(new Uint8Array([])), '');
-        assert.strictEqual(converters.bytesToFloat32(new Uint8Array([0x0, 0x0, 0x20, 0x3e])), 0.15625);
+        assert.strictEqual(converters.bytesToFloat32(new Uint8Array([0x01, 0x00, 0x00, 0x00])), 1.4012984643248170e-45);
+        assert.strictEqual(converters.bytesToFloat32(new Uint8Array([0xff, 0xff, 0x7f, 0x00])), 1.1754942106924411e-38);
+        assert.strictEqual(converters.bytesToFloat32(new Uint8Array([0x00, 0x00, 0x80, 0x00])), 1.1754943508222875e-38);
+        assert.strictEqual(converters.bytesToFloat32(new Uint8Array([0xff, 0xff, 0x7f, 0x7f])), 3.4028234663852885e+38);
+        assert.strictEqual(converters.bytesToFloat32(new Uint8Array([0xff, 0xff, 0x7f, 0x3f])), 0.9999999403953552);
+        assert.strictEqual(converters.bytesToFloat32(new Uint8Array([0x00, 0x00, 0x80, 0x3f])), 1);
+        assert.strictEqual(converters.bytesToFloat32(new Uint8Array([0x01, 0x00, 0x80, 0x3f])), 1.0000001192092895);
+        assert.strictEqual(converters.bytesToFloat32(new Uint8Array([0x00, 0x00, 0x00, 0xc0])), -2);
+        assert.strictEqual(converters.bytesToFloat32(new Uint8Array([0x00, 0x00, 0x00, 0x00])), 0);
+        assert.strictEqual(converters.bytesToFloat32(new Uint8Array([0x00, 0x00, 0x00, 0x80])), -0);
+        assert.strictEqual(converters.bytesToFloat32(new Uint8Array([0xdb, 0x0f, 0x49, 0x40])), 3.1415927410125732);
+        assert.strictEqual(converters.bytesToFloat32(new Uint8Array([0xab, 0xaa, 0xaa, 0x3e])), 0.3333333432674408);
+        assert.strictEqual(converters.bytesToFloat32(new Uint8Array([0x00, 0x00, 0x20, 0x3e])), 0.15625);
+        assert.strictEqual(converters.bytesToFloat32(new Uint8Array([0x00, 0x00, 0x80, 0x7f])), 'infinity');
+        assert.strictEqual(converters.bytesToFloat32(new Uint8Array([0x00, 0x00, 0x80, 0xff])), '-infinity');
+        assert.strictEqual(converters.bytesToFloat32(new Uint8Array([0x01, 0x00, 0x80, 0x7f])), 'NaN');
     });
 
     test('bytesToFloat64', function() {

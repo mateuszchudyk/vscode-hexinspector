@@ -120,12 +120,30 @@ export function bytesToFloat32(bytes: Uint8Array) {
    var exponent =
       ((bytes.length == 4 ? bytes[3] & 0x7f : 0) << 1) +
       (bytes.length >= 3 ? bytes[2] >> 7 : 0);
-   var mantissa =
+   var significand =
       ((bytes.length >= 3 ? bytes[2] & 0x7f : 0) << 16) +
       ((bytes.length >= 2 ? bytes[1] : 0) << 8) +
       bytes[0];
 
-   return (sign ? -1.0 : 1.0) * Math.pow(2, exponent - 127) * (1 + mantissa / (1 << 23));
+   if (exponent == 0x00) {
+      if (significand == 0) {
+         return sign * 0;
+      }
+      else {
+         return (sign ? -1.0 : 1.0) * Math.pow(2, -126) * (significand / (1 << 23));
+      }
+   }
+   else if (exponent == 0xff) {
+      if (significand == 0) {
+         return (sign ? '-' : '') + 'infinity';
+      }
+      else {
+         return 'NaN';
+      }
+   }
+   else {
+      return (sign ? -1.0 : 1.0) * Math.pow(2, exponent - 127) * (1 + significand / (1 << 23));
+   }
 }
 
 export function bytesToFloat64(bytes: Uint8Array) {
