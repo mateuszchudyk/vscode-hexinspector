@@ -8,6 +8,7 @@
 
 ### Fixed
 - Make bytesToFloat32 compatible with IEEE 754
+- Make bytesToFloat64 compatible with IEEE 754
 
 ## [0.0.2] (2019-01-25)
 

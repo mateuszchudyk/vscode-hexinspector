@@ -155,17 +155,35 @@ export function bytesToFloat64(bytes: Uint8Array) {
    var exponent =
       ((bytes.length == 8 ? bytes[7] & 0x7f : 0) << 4) +
       (bytes.length >= 7 ? bytes[6] >> 4 : 0);
-   var mantissa_hi =
+   var significand_hi =
       ((bytes.length >= 7 ? bytes[6] & 0x0f : 0) << 16) +
       ((bytes.length >= 6 ? bytes[5] : 0) << 8) +
       (bytes.length >= 5 ? bytes[4] : 0);
-   var mantissa_low =
+   var significand_low =
       (bytes.length >= 4 ? bytes[3] : 0) +
       (bytes.length >= 3 ? bytes[2] : 0) / (1 << 8) +
       (bytes.length >= 2 ? bytes[1] : 0) / (1 << 16) +
       bytes[0] / (1 << 24);
 
-   return (sign ? -1.0 : 1.0) * Math.pow(2, exponent - 1023) * (1 + mantissa_hi / (1 << 20) + mantissa_low / (1 << 28));
+   if (exponent == 0x000) {
+      if (significand_hi == 0 && significand_low == 0) {
+         return sign * 0;
+      }
+      else {
+         return (sign ? -1.0 : 1.0) * Math.pow(2, -1022) * (significand_hi / (1 << 20) + significand_low / (1 << 28));
+      }
+   }
+   else if (exponent == 0x7ff) {
+      if (significand_hi == 0 && significand_low == 0) {
+         return (sign ? '-' : '') + 'infinity';
+      }
+      else {
+         return 'NaN';
+      }
+   }
+   else {
+      return (sign ? -1.0 : 1.0) * Math.pow(2, exponent - 1023) * (1 + significand_hi / (1 << 20) + significand_low / (1 << 28));
+   }
 }
 
 export function bytesToStr(bytes: Uint8Array) {
