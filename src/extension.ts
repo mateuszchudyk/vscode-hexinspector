@@ -4,13 +4,29 @@ import * as vscode from 'vscode';
 import * as converters from './converters';
 import * as utils from './utils';
 
+function parseHex(str: string, regexes: Array<string>) {
+    for (let regex of regexes) {
+        let re = new RegExp('^' + regex + '$');
+        let match = re.exec(str);
+        if (match) {
+            return match[1];
+        }
+    }
+    return undefined;
+}
+
 export function activate(context: vscode.ExtensionContext) {
     var hover = vscode.languages.registerHoverProvider({scheme: '*', language: '*'}, {
         provideHover(document, position, token) {
             var word = document.getText(document.getWordRangeAtPosition(position));
 
             let littleEndian: boolean = vscode.workspace.getConfiguration('hexinspector').get('endianness');
-            let bytes = converters.hexToBytes(word, littleEndian);
+
+            let regexes = [
+                '0x([0-9a-zA-Z]+)',
+                '#([0-9a-zA-Z]+)'
+            ];
+            let bytes = converters.hexToBytes(parseHex(word, regexes), littleEndian);
             if (bytes) {
                 let length = bytes.length;
                 let asUnsigned = utils.addThousandsSeparator(converters.bytesToUnsignedDec(bytes));

@@ -4,44 +4,23 @@ import * as converters from '../converters';
 suite('Converters Tests', function () {
     test('hexToBytes', function() {
         assert.strictEqual(converters.hexToBytes(''), undefined);
-        assert.strictEqual(converters.hexToBytes('0x'), undefined);
-        assert.deepStrictEqual(converters.hexToBytes('0x00'), new Uint8Array([0x00]));
-        assert.deepStrictEqual(converters.hexToBytes('0x01'), new Uint8Array([0x01]));
-        assert.deepStrictEqual(converters.hexToBytes('0x7f'), new Uint8Array([0x7f]));
-        assert.deepStrictEqual(converters.hexToBytes('0xff'), new Uint8Array([0xff]));
-        assert.deepStrictEqual(converters.hexToBytes('0x123'), new Uint8Array([0x23, 0x01]));
-        assert.deepStrictEqual(converters.hexToBytes('0x1234'), new Uint8Array([0x34, 0x12]));
-        assert.deepStrictEqual(converters.hexToBytes('0x12345678'), new Uint8Array([0x78, 0x56, 0x34, 0x12]));
-
-        assert.strictEqual(converters.hexToBytes(''), undefined);
-        assert.strictEqual(converters.hexToBytes('#'), undefined);
-        assert.deepStrictEqual(converters.hexToBytes('#0'), new Uint8Array([0x00]));
-        assert.deepStrictEqual(converters.hexToBytes('#1'), new Uint8Array([0x01]));
-        assert.deepStrictEqual(converters.hexToBytes('#7f'), new Uint8Array([0x7f]));
-        assert.deepStrictEqual(converters.hexToBytes('#ff'), new Uint8Array([0xff]));
-        assert.deepStrictEqual(converters.hexToBytes('#123'), new Uint8Array([0x23, 0x01]));
-        assert.deepStrictEqual(converters.hexToBytes('#1234'), new Uint8Array([0x34, 0x12]));
-        assert.deepStrictEqual(converters.hexToBytes('#12345678'), new Uint8Array([0x78, 0x56, 0x34, 0x12]));
+        assert.deepStrictEqual(converters.hexToBytes('0'), new Uint8Array([0x00]));
+        assert.deepStrictEqual(converters.hexToBytes('1'), new Uint8Array([0x01]));
+        assert.deepStrictEqual(converters.hexToBytes('7f'), new Uint8Array([0x7f]));
+        assert.deepStrictEqual(converters.hexToBytes('ff'), new Uint8Array([0xff]));
+        assert.deepStrictEqual(converters.hexToBytes('123'), new Uint8Array([0x23, 0x01]));
+        assert.deepStrictEqual(converters.hexToBytes('1234'), new Uint8Array([0x34, 0x12]));
+        assert.deepStrictEqual(converters.hexToBytes('12345678'), new Uint8Array([0x78, 0x56, 0x34, 0x12]));
+        assert.deepStrictEqual(converters.hexToBytes('123456789abcdef0'), new Uint8Array([0xf0, 0xde, 0xbc, 0x9a, 0x78, 0x56, 0x34, 0x12]));
 
         assert.strictEqual(converters.hexToBytes('', false), undefined);
-        assert.strictEqual(converters.hexToBytes('0x', false), undefined);
-        assert.deepStrictEqual(converters.hexToBytes('0x00', false), new Uint8Array([0x00]));
-        assert.deepStrictEqual(converters.hexToBytes('0x01', false), new Uint8Array([0x01]));
-        assert.deepStrictEqual(converters.hexToBytes('0x7f', false), new Uint8Array([0x7f]));
-        assert.deepStrictEqual(converters.hexToBytes('0xff', false), new Uint8Array([0xff]));
-        assert.deepStrictEqual(converters.hexToBytes('0x123', false), new Uint8Array([0x01, 0x23]));
-        assert.deepStrictEqual(converters.hexToBytes('0x1234', false), new Uint8Array([0x12, 0x34]));
-        assert.deepStrictEqual(converters.hexToBytes('0x12345678', false), new Uint8Array([0x12, 0x34, 0x56, 0x78]));
-
-        assert.strictEqual(converters.hexToBytes('', false), undefined);
-        assert.strictEqual(converters.hexToBytes('#', false), undefined);
-        assert.deepStrictEqual(converters.hexToBytes('#0', false), new Uint8Array([0x00]));
-        assert.deepStrictEqual(converters.hexToBytes('#1', false), new Uint8Array([0x01]));
-        assert.deepStrictEqual(converters.hexToBytes('#7f', false), new Uint8Array([0x7f]));
-        assert.deepStrictEqual(converters.hexToBytes('#ff', false), new Uint8Array([0xff]));
-        assert.deepStrictEqual(converters.hexToBytes('#123', false), new Uint8Array([0x01, 0x23]));
-        assert.deepStrictEqual(converters.hexToBytes('#1234', false), new Uint8Array([0x12, 0x34]));
-        assert.deepStrictEqual(converters.hexToBytes('#12345678', false), new Uint8Array([0x12, 0x34, 0x56, 0x78]));
+        assert.deepStrictEqual(converters.hexToBytes('0', false), new Uint8Array([0x00]));
+        assert.deepStrictEqual(converters.hexToBytes('1', false), new Uint8Array([0x01]));
+        assert.deepStrictEqual(converters.hexToBytes('7f', false), new Uint8Array([0x7f]));
+        assert.deepStrictEqual(converters.hexToBytes('ff', false), new Uint8Array([0xff]));
+        assert.deepStrictEqual(converters.hexToBytes('123', false), new Uint8Array([0x01, 0x23]));
+        assert.deepStrictEqual(converters.hexToBytes('1234', false), new Uint8Array([0x12, 0x34]));
+        assert.deepStrictEqual(converters.hexToBytes('123456789abcdef0', false), new Uint8Array([0x12, 0x34, 0x56, 0x78, 0x9a, 0xbc, 0xde, 0xf0]));
     });
 
     test('bytesToUnsignedDec', function() {

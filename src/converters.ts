@@ -11,27 +11,14 @@ function switchEndian(bytes: Uint8Array) {
 }
 
 export function hexToBytes(str: string, little_endian: boolean = true) {
-   var rules = new Map<string, (str: string) => string>();
-
-   rules.set('0x[0-9a-fA-F]+', (str: string) => { return str.substr(2); });
-   rules.set('#[0-9a-fA-F]+', (str: string)  => { return str.substr(1); });
-
-   var hex = undefined;
-   for (let regex of rules.keys()) {
-      if (str.match('^' + regex + '$')) {
-         hex = rules.get(regex)(str);
-         break;
-      }
-   }
-
-   if (!hex) {
+   if (!str) {
       return undefined;
    }
-   hex = stringReverse(hex);
+   str = stringReverse(str);
 
-   var result = new Uint8Array((hex.length + 1) / 2);
+   var result = new Uint8Array((str.length + 1) / 2);
    for (let i = 0; i < result.length; i++) {
-      result[i] = parseInt(hex[2 * i], 16) + (2 * i + 1 < hex.length ? 16 * parseInt(hex[2 * i + 1], 16) : 0);
+      result[i] = parseInt(str[2 * i], 16) + (2 * i + 1 < str.length ? 16 * parseInt(str[2 * i + 1], 16) : 0);
    }
 
    if (!little_endian) {
