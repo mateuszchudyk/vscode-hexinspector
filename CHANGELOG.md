@@ -1,6 +1,6 @@
 # Change Log
 
-## [Unreleased]
+## [0.0.3] (2019-02-02)
 
 ### Added
 - Conversion to size in a readable form with binary prefix (e.g. KiB, etc.)
@@ -33,6 +33,7 @@ Display a hover with following conversions of the pointed hexadecimal value:
 
 
 
-[Unreleased]: https://github.com/mateuszchudyk/vscode-hexinspector/compare/v0.0.2...HEAD
+[Unreleased]: https://github.com/mateuszchudyk/vscode-hexinspector/compare/v0.0.3...HEAD
+[0.0.3]: https://github.com/mateuszchudyk/vscode-hexinspector/compare/v0.0.2...v0.0.3
 [0.0.2]: https://github.com/mateuszchudyk/vscode-hexinspector/compare/v0.0.1...v0.0.2
 [0.0.1]: https://github.com/mateuszchudyk/vscode-hexinspector/commit/165f3ed7caeed85a803346ce4e36781e25abb1ce
