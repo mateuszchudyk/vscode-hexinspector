@@ -10,16 +10,21 @@
 
 ## Overview
 
-**HexInspector** is an extension for [Visual Studio Code] provides fast and easy way to peek a hexadecimal value in different forms. The extension supports both `Little-Endian` and `Big-Endian` byte order. Hexadecimal values are recognized if they start with `0x` or `#` (e.g. `0x123`, `#1234`)
+**HexInspector** is an extension for [Visual Studio Code] that provides fast and easy way to peek other forms of a hexadecimal values. You just need to point a value and other forms will be summarized in a hover. Hexadecimal values are recognized if they start with `0x` or `#` (e.g. `0x123`, `#1234`). The extension supports both `Little-Endian` and `Big-Endian` byte order. You can choose endianness in settings.
 
-Hexadecimal value is converted to:
-  - Decimal - unsigned and signed (only if the highest bit is set)
-  - Binary
-  - Float32
-  - Float64
-  - Char sequence
+Extension is available on the [Marketplace].
 
-Extension can be downloaded from the [Marketplace].
+## Supported forms
+
+| Form               | Display                                                                      |
+|--------------------|------------------------------------------------------------------------------|
+| Decimal            | Unsigned (always) / Signed (if the highest bit of the highest byte is set)   |
+| Size               | With 3 decimal places                                                        |
+| Binary             | With leading zeros                                                           |
+| Float16 (IEEE 754) | Only if value has at most 2 bytes                                            |
+| Float32 (IEEE 754) | Only if value has at most 4 bytes                                            |
+| Float64 (IEEE 754) | Only if value has at most 8 bytes                                            |
+| Chars              | Sequence of characters                                                       |
 
 ## Screenshot
 
