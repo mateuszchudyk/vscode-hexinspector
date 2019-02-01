@@ -116,6 +116,36 @@ export function bytesToBin(bytes: Uint8Array) {
    return result;
 }
 
+export function bytesToFloat16(bytes: Uint8Array) {
+   if (bytes.length > 2 || bytes.length == 0) {
+      return '';
+   }
+
+   var sign = bytes.length == 2 ? bytes[1] >> 7 : 0;
+   var exponent = (bytes.length == 2 ? bytes[1] & 0x7c : 0) >> 2;
+   var significand = ((bytes.length == 2 ? bytes[1] & 0x3 : 0) << 8) + bytes[0];
+
+   if (exponent == 0x00) {
+      if (significand == 0) {
+         return sign * 0;
+      }
+      else {
+         return (sign ? -1.0 : 1.0) * Math.pow(2, -14) * (significand / (1 << 10));
+      }
+   }
+   else if (exponent == 0x1f) {
+      if (significand == 0) {
+         return (sign ? '-' : '') + 'infinity';
+      }
+      else {
+         return 'NaN';
+      }
+   }
+   else {
+      return (sign ? -1.0 : 1.0) * Math.pow(2, exponent - 15) * (1 + significand / (1 << 10));
+   }
+}
+
 export function bytesToFloat32(bytes: Uint8Array) {
    if (bytes.length > 4 || bytes.length == 0) {
       return '';

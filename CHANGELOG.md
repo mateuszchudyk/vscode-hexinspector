@@ -5,6 +5,7 @@
 ### Added
 - Conversion to size in a readable form with binary prefix (e.g. KiB, etc.)
 - Display length of a hexadecimal value in bytes
+- Conversion to Float16
 
 ### Fixed
 - Make bytesToFloat32 compatible with IEEE 754

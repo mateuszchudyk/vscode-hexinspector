@@ -19,7 +19,7 @@
 			"name": "entity.name.function"
 		},
 		{
-			"match": "(Decimal|Binary|Float32|Float64|Chars|Size)",
+			"match": "(Decimal|Binary|Float16|Float32|Float64|Chars|Size)",
 			"name": "entity.name.type"
 		}
 	]

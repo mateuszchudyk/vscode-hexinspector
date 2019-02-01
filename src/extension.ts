@@ -17,6 +17,7 @@ export function activate(context: vscode.ExtensionContext) {
                 let asSigned = utils.addThousandsSeparator(converters.bytesToSignedDec(bytes));
                 let asDecimal = asUnsigned + (asSigned != asUnsigned ? ' / ' + asSigned : '');
                 let asBinary = utils.addBytesSeparator(converters.bytesToBin(bytes));
+                let asFloat16 = converters.bytesToFloat16(bytes);
                 let asFloat32 = converters.bytesToFloat32(bytes);
                 let asFloat64 = converters.bytesToFloat64(bytes);
                 let asCharSequence = converters.bytesToStr(bytes);
@@ -29,6 +30,7 @@ export function activate(context: vscode.ExtensionContext) {
                     ''                                                  + '\n' +
                     'Decimal:  ' + asDecimal                            + '\n' +
                     'Binary:   ' + asBinary                             + '\n' +
+                    'Float16:  ' + (asFloat16 == '' ? '-' : asFloat16)  + '\n' +
                     'Float32:  ' + (asFloat32 == '' ? '-' : asFloat32)  + '\n' +
                     'Float64:  ' + (asFloat64 == '' ? '-' : asFloat64)  + '\n' +
                     'Chars:    ' + asCharSequence                       + '\n' +

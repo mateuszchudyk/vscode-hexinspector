@@ -68,6 +68,24 @@ suite('Converters Tests', function () {
         assert.strictEqual(converters.bytesToBin(new Uint8Array([0xdf, 0x59, 0x37, 0x5f])), '01011111001101110101100111011111');
     });
 
+    test('bytesToFloat16', function() {
+        assert.strictEqual(converters.bytesToFloat16(new Uint8Array([])), '');
+        assert.strictEqual(converters.bytesToFloat16(new Uint8Array([0x01, 0x00])), 5.960464477539063e-8);
+        assert.strictEqual(converters.bytesToFloat16(new Uint8Array([0xff, 0x03])), 6.097555160522461e-5);
+        assert.strictEqual(converters.bytesToFloat16(new Uint8Array([0x00, 0x04])), 6.103515625e-5);
+        assert.strictEqual(converters.bytesToFloat16(new Uint8Array([0xff, 0x7b])), 65504);
+        assert.strictEqual(converters.bytesToFloat16(new Uint8Array([0xff, 0x3b])), 0.99951171875);
+        assert.strictEqual(converters.bytesToFloat16(new Uint8Array([0x00, 0x3c])), 1);
+        assert.strictEqual(converters.bytesToFloat16(new Uint8Array([0x01, 0x3c])), 1.0009765625);
+        assert.strictEqual(converters.bytesToFloat16(new Uint8Array([0x00, 0xc0])), -2);
+        assert.strictEqual(converters.bytesToFloat16(new Uint8Array([0x00, 0x00])), 0);
+        assert.strictEqual(converters.bytesToFloat16(new Uint8Array([0x00, 0x80])), -0);
+        assert.strictEqual(converters.bytesToFloat16(new Uint8Array([0x55, 0x35])), 0.333251953125);
+        assert.strictEqual(converters.bytesToFloat16(new Uint8Array([0x00, 0x7c])), 'infinity');
+        assert.strictEqual(converters.bytesToFloat16(new Uint8Array([0x00, 0xfc])), '-infinity');
+        assert.strictEqual(converters.bytesToFloat16(new Uint8Array([0x01, 0x7c])), 'NaN');
+    });
+
     test('bytesToFloat32', function() {
         assert.strictEqual(converters.bytesToFloat32(new Uint8Array([])), '');
         assert.strictEqual(converters.bytesToFloat32(new Uint8Array([0x01, 0x00, 0x00, 0x00])), 1.4012984643248170e-45);
