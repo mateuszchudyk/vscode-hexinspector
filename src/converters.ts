@@ -96,9 +96,14 @@ export function bytesToSignedDec(bytes: Uint8Array) {
       return '';
    }
 
-   var sign = bytes[bytes.length - 1] >> 7;
-   bytes[bytes.length - 1] &= 0x7f;
-   return (sign ? '-' : '') + bytesToUnsignedDec(bytes);
+   let copy = new Uint8Array(bytes.length);
+   for (let i = 0; i < bytes.length; ++i) {
+      copy[i] = bytes[i];
+   }
+
+   let sign = copy[copy.length - 1] >> 7;
+   copy[copy.length - 1] &= 0x7f;
+   return (sign ? '-' : '') + bytesToUnsignedDec(copy);
 }
 
 export function bytesToBin(bytes: Uint8Array) {
