@@ -12,34 +12,29 @@ export function activate(context: vscode.ExtensionContext) {
             let littleEndian: boolean = vscode.workspace.getConfiguration('hexinspector').get('endianness');
             let bytes = converters.hexToBytes(word, littleEndian);
             if (bytes) {
-                let endianness = (littleEndian ? 'Little' : 'Big') + ' Endian'
-                let unsigned = utils.addThousandsSeparator(converters.bytesToUnsignedDec(bytes));
-                let signed = utils.addThousandsSeparator(converters.bytesToSignedDec(bytes));
-                let decimal = unsigned + (signed != unsigned ? ' / ' + signed : '');
+                let length = bytes.length;
+                let asUnsigned = utils.addThousandsSeparator(converters.bytesToUnsignedDec(bytes));
+                let asSigned = utils.addThousandsSeparator(converters.bytesToSignedDec(bytes));
+                let asDecimal = asUnsigned + (asSigned != asUnsigned ? ' / ' + asSigned : '');
+                let asBinary = utils.addBytesSeparator(converters.bytesToBin(bytes));
+                let asFloat32 = converters.bytesToFloat32(bytes);
+                let asFloat64 = converters.bytesToFloat64(bytes);
+                let asCharSequence = converters.bytesToStr(bytes);
+                let asSize = converters.bytesToSize(bytes);
 
-                let binary = utils.addBytesSeparator(converters.bytesToBin(bytes));
-
-                let float32 = converters.bytesToFloat32(bytes);
-                if (float32 == '') {
-                    float32 = '-';
-                }
-
-                let float64 = converters.bytesToFloat64(bytes);
-                if (float64 == '') {
-                    float64 = '-';
-                }
+                let endianness = (littleEndian ? 'Little' : 'Big') + ' Endian';
 
                 let message =
-                    'HexInspector: ' + word + ' (' + bytes.length + 'B)' + '\n' +
-                    ''                                                   + '\n' +
-                    'Decimal:  ' + decimal                               + '\n' +
-                    'Binary:   ' + binary                                + '\n' +
-                    'Float32:  ' + float32                               + '\n' +
-                    'Float64:  ' + float64                               + '\n' +
-                    'Chars:    ' + converters.bytesToStr(bytes)          + '\n' +
-                    'Size:     ' + converters.bytesToSize(bytes)         + '\n' +
-                    ''                                                   + '\n' +
-                    endianness                                           + '\n' +
+                    'HexInspector: ' + word + ' (' + length + 'B)'      + '\n' +
+                    ''                                                  + '\n' +
+                    'Decimal:  ' + asDecimal                            + '\n' +
+                    'Binary:   ' + asBinary                             + '\n' +
+                    'Float32:  ' + (asFloat32 == '' ? '-' : asFloat32)  + '\n' +
+                    'Float64:  ' + (asFloat64 == '' ? '-' : asFloat64)  + '\n' +
+                    'Chars:    ' + asCharSequence                       + '\n' +
+                    'Size:     ' + asSize                               + '\n' +
+                    ''                                                  + '\n' +
+                    endianness                                          + '\n' +
                     '';
 
                 return new vscode.Hover({language: 'hexinspector', value: message});
