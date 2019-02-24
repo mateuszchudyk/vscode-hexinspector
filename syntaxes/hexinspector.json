@@ -1,26 +1,22 @@
-{ 
+{
 	"scopeName": "source.hexinspector",
 	"fileTypes": [ "hexinspector" ],
 	"patterns": [
 		{
 			"match": "HexInspector:",
-			"name": "markup.heading.2.html"
+			"name": "markup.heading.1.html"
 		},
 		{
-			"match": "(Little Endian|Big Endian)",
-			"name": "entity.name.function"
+			"match": "(Little Endian|Big Endian|[0-9]+B)",
+			"name": "string.quoted"
 		},
 		{
 			"match": "0x([0-9a-fA-F]+)",
-			"name": "entity.name.class"
+			"name": "constant.numeric"
 		},
 		{
-			"match": "[0-9]+B",
-			"name": "entity.name.function"
-		},
-		{
-			"match": "(Decimal|Binary|Float16|Float32|Float64|Chars|Size)",
-			"name": "entity.name.type"
+			"match": "(Decimal|Size|Binary|Float16|Float32|Float64|Chars)",
+			"name": "keyword.other"
 		}
 	]
 }
