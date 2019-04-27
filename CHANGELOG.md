@@ -1,5 +1,10 @@
 # Change Log
 
+## [1.0.0] (2019-04-28)
+
+### Added
+- New hover layout colors
+
 ## [0.0.3] (2019-02-02)
 
 ### Added
@@ -33,7 +38,8 @@ Display a hover with following conversions of the pointed hexadecimal value:
 
 
 
-[Unreleased]: https://github.com/mateuszchudyk/vscode-hexinspector/compare/v0.0.3...HEAD
+[Unreleased]: https://github.com/mateuszchudyk/vscode-hexinspector/compare/v1.0.0...HEAD
+[1.0.0]: https://github.com/mateuszchudyk/vscode-hexinspector/compare/v0.0.3...v1.0.0
 [0.0.3]: https://github.com/mateuszchudyk/vscode-hexinspector/compare/v0.0.2...v0.0.3
 [0.0.2]: https://github.com/mateuszchudyk/vscode-hexinspector/compare/v0.0.1...v0.0.2
 [0.0.1]: https://github.com/mateuszchudyk/vscode-hexinspector/commit/165f3ed7caeed85a803346ce4e36781e25abb1ce
