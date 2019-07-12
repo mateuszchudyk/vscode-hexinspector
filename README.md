@@ -6,7 +6,7 @@
 
 [![Installs](https://img.shields.io/visual-studio-marketplace/i/mateuszchudyk.hexinspector.svg?colorB=blue&style=for-the-badge)](https://marketplace.visualstudio.com/items?itemName=mateuszchudyk.hexinspector)
 [![Release](https://img.shields.io/github/release/mateuszchudyk/vscode-hexinspector.svg?colorB=blue&style=for-the-badge)](https://github.com/mateuszchudyk/vscode-hexinspector/releases)
-[![License](https://img.shields.io/badge/LIcense-MIT-blue.svg?colorB=blue&style=for-the-badge)](./LICENSE)
+[![License](https://img.shields.io/badge/License-MIT-blue.svg?colorB=blue&style=for-the-badge)](./LICENSE)
 
 ## Overview
 
@@ -28,7 +28,7 @@ Extension is available on the [Marketplace].
 
 ## Screenshot
 
-![](images/screenshot.png)
+<img src='images/screenshot.png'>
 
 ## License
 
