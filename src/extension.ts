@@ -23,7 +23,7 @@ export function activate(context: vscode.ExtensionContext) {
             let littleEndian: boolean = vscode.workspace.getConfiguration('hexinspector').get('endianness');
 
             let regexes = [
-                '0x([0-9a-fA-F]+)',
+                '0x([0-9a-fA-F]+)(?:[uU])?(?:[lL])?(?:[lL])?',
                 '#([0-9a-fA-F]+)'
             ];
             let bytes = converters.hexToBytes(parseHex(word, regexes), littleEndian);
