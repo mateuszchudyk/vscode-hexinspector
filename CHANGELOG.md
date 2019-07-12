@@ -2,7 +2,7 @@
 
 ## [1.0.0] (2019-04-28)
 
-### Added
+### Changed
 - New hover layout colors
 
 ## [0.0.3] (2019-02-02)
