@@ -16,3 +16,6 @@ export function addThousandsSeparator(str: string) {
 export function addBytesSeparator(str: string) {
    return addSeparatorToNumber(str, ' ', 8);
 }
+export function addNibblesSeparator(str: string) {
+   return addSeparatorToNumber(str, ' ', 4);
+}

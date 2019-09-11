@@ -21,6 +21,7 @@ export function activate(context: vscode.ExtensionContext) {
             var word = document.getText(document.getWordRangeAtPosition(position));
 
             let littleEndian: boolean = vscode.workspace.getConfiguration('hexinspector').get('endianness');
+            let separateByByte: boolean = vscode.workspace.getConfiguration('hexinspector').get('separateByByteOrNibble');
 
             let regexes = [
                 '0x([0-9a-fA-F]+)(?:[uU])?(?:[lL])?(?:[lL])?',
@@ -32,7 +33,7 @@ export function activate(context: vscode.ExtensionContext) {
                 let asUnsigned = utils.addThousandsSeparator(converters.bytesToUnsignedDec(bytes));
                 let asSigned = utils.addThousandsSeparator(converters.bytesToSignedDec(bytes));
                 let asDecimal = asUnsigned + (asSigned != asUnsigned ? ' / ' + asSigned : '');
-                let asBinary = utils.addBytesSeparator(converters.bytesToBin(bytes));
+                let asBinary = (separateByByte ? utils.addBytesSeparator(converters.bytesToBin(bytes)) : utils.addNibblesSeparator(converters.bytesToBin(bytes)) );
                 let asFloat16 = converters.bytesToFloat16(bytes);
                 let asFloat32 = converters.bytesToFloat32(bytes);
                 let asFloat64 = converters.bytesToFloat64(bytes);
