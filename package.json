@@ -30,6 +30,10 @@
 			"type": "object",
 			"title": "HexInspector",
 			"properties": {
+				"hexinspector.hoverContent": {
+					"type": "array",
+					"default": ["decimal", "size", "binary", "float16", "float32", "float64", "chars"]
+				},
 				"hexinspector.endianness": {
 					"type": "boolean",
 					"default": true,

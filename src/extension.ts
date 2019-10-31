@@ -20,40 +20,61 @@ export function activate(context: vscode.ExtensionContext) {
         provideHover(document, position, token) {
             var word = document.getText(document.getWordRangeAtPosition(position));
 
+            let forms: string[] = vscode.workspace.getConfiguration('hexinspector').get('hoverContent');
             let littleEndian: boolean = vscode.workspace.getConfiguration('hexinspector').get('endianness');
+
+            let formsMap = {
+                'binary'  : function(bytes: Uint8Array) {
+                    return utils.addBytesSeparator(converters.bytesToBin(bytes));
+                },
+                'chars'   : converters.bytesToStr,
+                'decimal' : function(bytes: Uint8Array) {
+                    let asUnsigned = utils.addThousandsSeparator(converters.bytesToUnsignedDec(bytes));
+                    let asSigned = utils.addThousandsSeparator(converters.bytesToSignedDec(bytes));
+                    return asUnsigned + (asSigned != asUnsigned ? ' / ' + asSigned : '');
+                },
+                'float16' : function(bytes: Uint8Array) {
+                    let result = converters.bytesToFloat16(bytes);
+                    return result == '' ? '-' : result;
+                },
+                'float32' : function(bytes: Uint8Array) {
+                    let result = converters.bytesToFloat32(bytes);
+                    return result == '' ? '-' : result;
+                },
+                'float64' : function(bytes: Uint8Array) {
+                    let result = converters.bytesToFloat64(bytes);
+                    return result == '' ? '-' : result;
+                },
+                'size' : converters.bytesToSize,
+            };
+
+            let formMaxLength = 0;
+            for (let form of forms) {
+                if (form in formsMap)
+                    formMaxLength = Math.max(formMaxLength, form.length);
+            }
 
             let regexes = [
                 '0x([0-9a-fA-F]+)(?:[uU])?(?:[lL])?(?:[lL])?',
                 '#([0-9a-fA-F]+)'
             ];
             let bytes = converters.hexToBytes(parseHex(word, regexes), littleEndian);
+
             if (bytes) {
                 let length = bytes.length;
-                let asUnsigned = utils.addThousandsSeparator(converters.bytesToUnsignedDec(bytes));
-                let asSigned = utils.addThousandsSeparator(converters.bytesToSignedDec(bytes));
-                let asDecimal = asUnsigned + (asSigned != asUnsigned ? ' / ' + asSigned : '');
-                let asBinary = utils.addBytesSeparator(converters.bytesToBin(bytes));
-                let asFloat16 = converters.bytesToFloat16(bytes);
-                let asFloat32 = converters.bytesToFloat32(bytes);
-                let asFloat64 = converters.bytesToFloat64(bytes);
-                let asCharSequence = converters.bytesToStr(bytes);
-                let asSize = converters.bytesToSize(bytes);
-
                 let endianness = (littleEndian ? 'Little' : 'Big') + ' Endian';
 
-                let message =
-                    'HexInspector: ' + word + ' (' + length + 'B)'      + '\n' +
-                    ''                                                  + '\n' +
-                    'Decimal:  ' + asDecimal                            + '\n' +
-                    'Size:     ' + asSize                               + '\n' +
-                    'Binary:   ' + asBinary                             + '\n' +
-                    'Float16:  ' + (asFloat16 == '' ? '-' : asFloat16)  + '\n' +
-                    'Float32:  ' + (asFloat32 == '' ? '-' : asFloat32)  + '\n' +
-                    'Float64:  ' + (asFloat64 == '' ? '-' : asFloat64)  + '\n' +
-                    'Chars:    ' + asCharSequence                       + '\n' +
-                    ''                                                  + '\n' +
-                    endianness                                          + '\n' +
-                    '';
+                let message = 'HexInspector: ' + word + ' (' + length + 'B)\n\n';
+                for (let form of forms) {
+                    if (!(form in formsMap))
+                        continue;
+
+                    message += form.charAt(0).toUpperCase() + form.slice(1) + ':  ';
+                    message += ' '.repeat(formMaxLength - form.length);
+                    message += formsMap[form](bytes);
+                    message += '\n';
+                }
+                message += '\n' + endianness;
 
                 return new vscode.Hover({language: 'hexinspector', value: message});
             }
