@@ -33,19 +33,10 @@ export function activate(context: vscode.ExtensionContext) {
                     let asSigned = utils.addThousandsSeparator(converters.bytesToSignedDec(bytes));
                     return asUnsigned + (asSigned != asUnsigned ? ' / ' + asSigned : '');
                 },
-                'float16' : function(bytes: Uint8Array) {
-                    let result = converters.bytesToFloat16(bytes);
-                    return result == '' ? '-' : result;
-                },
-                'float32' : function(bytes: Uint8Array) {
-                    let result = converters.bytesToFloat32(bytes);
-                    return result == '' ? '-' : result;
-                },
-                'float64' : function(bytes: Uint8Array) {
-                    let result = converters.bytesToFloat64(bytes);
-                    return result == '' ? '-' : result;
-                },
-                'size' : converters.bytesToSize,
+                'float16' : converters.bytesToFloat16,
+                'float32' : converters.bytesToFloat32,
+                'float64' : converters.bytesToFloat64,
+                'size'    : converters.bytesToSize,
             };
 
             let formMaxLength = 0;
@@ -69,10 +60,12 @@ export function activate(context: vscode.ExtensionContext) {
                     if (!(form in formsMap))
                         continue;
 
+                    let result = formsMap[form](bytes);
+                    if (result == '')
+                        continue;
+
                     message += form.charAt(0).toUpperCase() + form.slice(1) + ':  ';
-                    message += ' '.repeat(formMaxLength - form.length);
-                    message += formsMap[form](bytes);
-                    message += '\n';
+                    message += ' '.repeat(formMaxLength - form.length) + result + '\n';
                 }
                 message += '\n' + endianness;
 
