@@ -2,6 +2,29 @@ import * as assert from 'assert';
 import * as converters from '../converters';
 
 suite('Converters Tests', function () {
+    test('binToBytes', function() {
+        assert.strictEqual(converters.binToBytes(''), undefined);
+        assert.deepStrictEqual(converters.binToBytes('0'), new Uint8Array([0x00]));
+        assert.deepStrictEqual(converters.binToBytes('1'), new Uint8Array([0x01]));
+        assert.deepStrictEqual(converters.binToBytes('00'), new Uint8Array([0x00]));
+        assert.deepStrictEqual(converters.binToBytes('01'), new Uint8Array([0x01]));
+        assert.deepStrictEqual(converters.binToBytes('10'), new Uint8Array([0x02]));
+        assert.deepStrictEqual(converters.binToBytes('10001000'), new Uint8Array([0x88]));
+        assert.deepStrictEqual(converters.binToBytes('1000100000010001'), new Uint8Array([0x11, 0x88]));
+        assert.deepStrictEqual(converters.binToBytes('1011111110111111011000'), new Uint8Array([0xd8, 0xef, 0x2f]));
+
+        assert.strictEqual(converters.binToBytes(''), undefined);
+        assert.deepStrictEqual(converters.binToBytes('0', false), new Uint8Array([0x00]));
+        assert.deepStrictEqual(converters.binToBytes('1', false), new Uint8Array([0x01]));
+        assert.deepStrictEqual(converters.binToBytes('00', false), new Uint8Array([0x00]));
+        assert.deepStrictEqual(converters.binToBytes('01', false), new Uint8Array([0x01]));
+        assert.deepStrictEqual(converters.binToBytes('10', false), new Uint8Array([0x02]));
+        assert.deepStrictEqual(converters.binToBytes('10001000', false), new Uint8Array([0x88]));
+        assert.deepStrictEqual(converters.binToBytes('1000100000010001', false), new Uint8Array([0x88, 0x11]));
+        assert.deepStrictEqual(converters.binToBytes('1011111110111111011000', false), new Uint8Array([0x2f, 0xef, 0xd8]));
+
+    });
+
     test('hexToBytes', function() {
         assert.strictEqual(converters.hexToBytes(''), undefined);
         assert.deepStrictEqual(converters.hexToBytes('0'), new Uint8Array([0x00]));

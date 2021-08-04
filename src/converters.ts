@@ -10,6 +10,29 @@ function switchEndian(bytes: Uint8Array) {
    return result;
 }
 
+//
+// convert to bytes
+//
+export function binToBytes(str: string, little_endian: boolean = true) {
+   if (!str) {
+      return undefined;
+   }
+   str = reverseString(str);
+
+   var result = new Uint8Array((str.length + 7) / 8);
+   for (let i = 0; i < result.length; i++) {
+      result[i] = 0;
+      for (let j = 0; j < 8 && 8 * i + j < str.length; j++) {
+         result[i] += (str[i * 8 + j] == '1' ? 1 : 0) << j;
+      }
+   }
+
+   if (!little_endian) {
+      result = switchEndian(result);
+   }
+   return result;
+}
+
 export function hexToBytes(str: string, little_endian: boolean = true) {
    if (!str) {
       return undefined;
@@ -27,6 +50,9 @@ export function hexToBytes(str: string, little_endian: boolean = true) {
    return result;
 }
 
+//
+// convert from bytes
+//
 export function bytesToUnsignedDec(bytes: Uint8Array) {
    if (bytes.length == 0) {
       return '';
