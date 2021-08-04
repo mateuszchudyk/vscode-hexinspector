@@ -1,4 +1,4 @@
-function stringReverse(str: string) {
+function reverseString(str: string) {
    return str.split('').reverse().join('');
 }
 
@@ -14,7 +14,7 @@ export function hexToBytes(str: string, little_endian: boolean = true) {
    if (!str) {
       return undefined;
    }
-   str = stringReverse(str);
+   str = reverseString(str);
 
    var result = new Uint8Array((str.length + 1) / 2);
    for (let i = 0; i < result.length; i++) {
