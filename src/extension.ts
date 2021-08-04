@@ -1,19 +1,7 @@
 'use strict';
 
 import * as vscode from 'vscode';
-import * as converters from './converters';
-import * as utils from './utils';
-
-function parseHex(str: string, regexes: Array<string>) {
-    for (let regex of regexes) {
-        let re = new RegExp('^' + regex + '$');
-        let match = re.exec(str);
-        if (match) {
-            return match[1];
-        }
-    }
-    return undefined;
-}
+import * as input_data_types from './input_data_types';
 
 export function activate(context: vscode.ExtensionContext) {
     var hover = vscode.languages.registerHoverProvider({scheme: '*', language: '*'}, {
@@ -23,33 +11,28 @@ export function activate(context: vscode.ExtensionContext) {
             let forms: string[] = vscode.workspace.getConfiguration('hexinspector').get('hoverContent');
             let littleEndian: boolean = vscode.workspace.getConfiguration('hexinspector').get('endianness');
 
-            let formsMap = {
-                'binary'  : function(bytes: Uint8Array) {
-                    return utils.addBytesSeparator(converters.bytesToBin(bytes));
-                },
-                'chars'   : converters.bytesToStr,
-                'decimal' : function(bytes: Uint8Array) {
-                    let asUnsigned = utils.addThousandsSeparator(converters.bytesToUnsignedDec(bytes));
-                    let asSigned = utils.addThousandsSeparator(converters.bytesToSignedDec(bytes));
-                    return asUnsigned + (asSigned != asUnsigned ? ' / ' + asSigned : '');
-                },
-                'float16' : converters.bytesToFloat16,
-                'float32' : converters.bytesToFloat32,
-                'float64' : converters.bytesToFloat64,
-                'size'    : converters.bytesToSize,
-            };
+            let inputDataTypes: input_data_types.InputDataType[] = [
+                new input_data_types.InputDataTypeHex,
+                new input_data_types.InputDataTypeBin,
+            ];
+
+            let bytes: Uint8Array;
+            let formsMap : input_data_types.MapFormToFunction;
+
+            for (let inputDataType of inputDataTypes) {
+                let parsed = inputDataType.parse(word);
+                if (!parsed)
+                    continue;
+
+                bytes = inputDataType.convert(parsed);
+                formsMap = inputDataType.getFormsMap();
+            }
 
             let formMaxLength = 0;
             for (let form of forms) {
                 if (form in formsMap)
                     formMaxLength = Math.max(formMaxLength, form.length);
             }
-
-            let regexes = [
-                '0x([0-9a-fA-F]+)(?:[uU])?(?:[lL])?(?:[lL])?',
-                '#([0-9a-fA-F]+)'
-            ];
-            let bytes = converters.hexToBytes(parseHex(word, regexes), littleEndian);
 
             if (bytes) {
                 let length = bytes.length;

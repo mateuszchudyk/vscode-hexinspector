@@ -11,11 +11,11 @@
 			"name": "string.quoted"
 		},
 		{
-			"match": "(0x|#).*",
+			"match": "(0x|#|0b).*",
 			"name": "constant.numeric"
 		},
 		{
-			"match": "(Decimal|Size|Binary|Float16|Float32|Float64|Chars)",
+			"match": "(Decimal|Size|Binary|Hexadecimal|Float16|Float32|Float64|Chars)",
 			"name": "keyword.other"
 		}
 	]
