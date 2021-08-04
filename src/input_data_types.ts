@@ -1,11 +1,6 @@
 'use strict';
 
 import * as converters from './converters';
-import * as utils from './utils';
-
-export type MapFormToFunction = { 
-    [name: string]: (bytes: Uint8Array) => string
-};
 
 function addSeparatorToNumber(str: string, sep: string, n: number) {
     var result = '';
@@ -21,12 +16,12 @@ function addSeparatorToNumber(str: string, sep: string, n: number) {
 function createFormsMap(forms: string[]) {
     let availableFormsMap = {
         'binary'      : function(bytes: Uint8Array) {
-            return utils.addBytesSeparator(converters.bytesToBin(bytes));
+            return addSeparatorToNumber(converters.bytesToBin(bytes), ' ', 8);
         },
         'chars'       : converters.bytesToStr,
         'decimal'     : function(bytes: Uint8Array) {
-            let asUnsigned = utils.addThousandsSeparator(converters.bytesToUnsignedDec(bytes));
-            let asSigned = utils.addThousandsSeparator(converters.bytesToSignedDec(bytes));
+            let asUnsigned = addSeparatorToNumber(converters.bytesToUnsignedDec(bytes), ',', 3);
+            let asSigned = addSeparatorToNumber(converters.bytesToSignedDec(bytes),  ',', 3);
             return asUnsigned + (asSigned != asUnsigned ? ' / ' + asSigned : '');
         },
         'float16'     : converters.bytesToFloat16,
@@ -44,6 +39,10 @@ function createFormsMap(forms: string[]) {
     }
     return result;
 }
+
+export type MapFormToFunction = {
+    [name: string]: (bytes: Uint8Array) => string
+};
 
 export abstract class InputDataType {
     abstract parse(str: string) : string;
