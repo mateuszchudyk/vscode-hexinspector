@@ -27,7 +27,9 @@ function createFormsMap(forms: string[]) {
         'float16'     : converters.bytesToFloat16,
         'float32'     : converters.bytesToFloat32,
         'float64'     : converters.bytesToFloat64,
-        'hexadecimal' : converters.bytesToHex,
+        'hexadecimal' : function(bytes: Uint8Array) {
+            return addSeparatorToNumber(converters.bytesToHex(bytes), ' ', 2);
+        },
         'size'        : converters.bytesToSize,
     };
 
