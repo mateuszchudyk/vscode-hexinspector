@@ -70,6 +70,14 @@ suite('Converters Tests', function () {
         assert.strictEqual(converters.bytesToBin(new Uint8Array([0xdf, 0x59, 0x37, 0x5f])), '01011111001101110101100111011111');
     });
 
+    test('bytesToHex', function() {
+        assert.strictEqual(converters.bytesToHex(new Uint8Array([])), '');
+        assert.strictEqual(converters.bytesToHex(new Uint8Array([0x01])), '01');
+        assert.strictEqual(converters.bytesToHex(new Uint8Array([0x01, 0x02])), '0201');
+        assert.strictEqual(converters.bytesToHex(new Uint8Array([0x12, 0x34, 0xfc])), 'fc3412');
+        assert.strictEqual(converters.bytesToHex(new Uint8Array([0xdf, 0x59, 0x37, 0x5f])), '5f3759df');
+    });
+
     test('bytesToFloat16', function() {
         assert.strictEqual(converters.bytesToFloat16(new Uint8Array([])), '');
         assert.strictEqual(converters.bytesToFloat16(new Uint8Array([0x01, 0x00])), 5.960464477539063e-8);

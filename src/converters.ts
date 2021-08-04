@@ -129,6 +129,14 @@ export function bytesToBin(bytes: Uint8Array) {
    return result;
 }
 
+export function bytesToHex(bytes: Uint8Array) {
+   var result = '';
+   for (const byte of bytes) {
+      result = ('0' + byte.toString(16)).slice(-2) + result;
+   }
+   return result;
+}
+
 export function bytesToFloat16(bytes: Uint8Array) {
    if (bytes.length > 2 || bytes.length == 0) {
       return '';
