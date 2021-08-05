@@ -112,7 +112,7 @@ suite('Converters Tests', function () {
         assert.strictEqual(converters.bytesToFloat16(new Uint8Array([0x01, 0x3c])), 1.0009765625);
         assert.strictEqual(converters.bytesToFloat16(new Uint8Array([0x00, 0xc0])), -2);
         assert.strictEqual(converters.bytesToFloat16(new Uint8Array([0x00, 0x00])), 0);
-        assert.strictEqual(converters.bytesToFloat16(new Uint8Array([0x00, 0x80])), -0);
+        assert.strictEqual(converters.bytesToFloat16(new Uint8Array([0x00, 0x80])), 0);
         assert.strictEqual(converters.bytesToFloat16(new Uint8Array([0x55, 0x35])), 0.333251953125);
         assert.strictEqual(converters.bytesToFloat16(new Uint8Array([0x00, 0x7c])), 'infinity');
         assert.strictEqual(converters.bytesToFloat16(new Uint8Array([0x00, 0xfc])), '-infinity');
@@ -130,7 +130,7 @@ suite('Converters Tests', function () {
         assert.strictEqual(converters.bytesToFloat32(new Uint8Array([0x01, 0x00, 0x80, 0x3f])), 1.0000001192092895);
         assert.strictEqual(converters.bytesToFloat32(new Uint8Array([0x00, 0x00, 0x00, 0xc0])), -2);
         assert.strictEqual(converters.bytesToFloat32(new Uint8Array([0x00, 0x00, 0x00, 0x00])), 0);
-        assert.strictEqual(converters.bytesToFloat32(new Uint8Array([0x00, 0x00, 0x00, 0x80])), -0);
+        assert.strictEqual(converters.bytesToFloat32(new Uint8Array([0x00, 0x00, 0x00, 0x80])), 0);
         assert.strictEqual(converters.bytesToFloat32(new Uint8Array([0xdb, 0x0f, 0x49, 0x40])), 3.1415927410125732);
         assert.strictEqual(converters.bytesToFloat32(new Uint8Array([0xab, 0xaa, 0xaa, 0x3e])), 0.3333333432674408);
         assert.strictEqual(converters.bytesToFloat32(new Uint8Array([0x00, 0x00, 0x20, 0x3e])), 0.15625);
@@ -151,7 +151,7 @@ suite('Converters Tests', function () {
         assert.strictEqual(converters.bytesToFloat64(new Uint8Array([0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x40])), 2);
         assert.strictEqual(converters.bytesToFloat64(new Uint8Array([0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0xc0])), -2);
         assert.strictEqual(converters.bytesToFloat64(new Uint8Array([0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00])), 0);
-        assert.strictEqual(converters.bytesToFloat64(new Uint8Array([0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x80])), -0);
+        assert.strictEqual(converters.bytesToFloat64(new Uint8Array([0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x80])), 0);
         assert.strictEqual(converters.bytesToFloat64(new Uint8Array([0x18, 0x2d, 0x44, 0x54, 0xfb, 0x21, 0x09, 0x40])), 3.1415926535897930);
         assert.strictEqual(converters.bytesToFloat64(new Uint8Array([0x55, 0x55, 0x55, 0x55, 0x55, 0x55, 0xd5, 0x3f])), 0.3333333333333333);
         assert.strictEqual(converters.bytesToFloat64(new Uint8Array([0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0xf0, 0x7f])), 'infinity');
