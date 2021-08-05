@@ -14,6 +14,7 @@ export function activate(context: vscode.ExtensionContext) {
             let inputDataTypes: input_data_types.InputDataType[] = [
                 new input_data_types.InputDataTypeHex,
                 new input_data_types.InputDataTypeBin,
+                new input_data_types.InputDataTypeDec,
             ];
 
             let bytes: Uint8Array;

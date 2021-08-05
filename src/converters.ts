@@ -33,6 +33,41 @@ export function binToBytes(str: string, little_endian: boolean = true) {
    return result;
 }
 
+function decToBin(str: string) {
+   let result = '';
+
+   let lastDigitIndex = 0;
+   let dec = new Uint8Array(str.length);
+   for (let i = 0; i < str.length; i++) {
+      dec[str.length - i - 1] = parseInt(str[i]);
+      if (dec[i] != 0)
+         lastDigitIndex = i;
+   }
+
+   while (lastDigitIndex >= 0) {
+      result = (dec[0] % 2) + result;
+      for (let i = lastDigitIndex; i >= 0; i--) {
+         if (dec[i] % 2 != 0 && i > 0) {
+            dec[i - 1] += 10
+         }
+         dec[i] /= 2;
+      }
+
+      while (dec[lastDigitIndex] == 0)
+         --lastDigitIndex;
+   }
+
+   return result;
+}
+
+export function decToBytes(str: string, little_endian: boolean = true) {
+   if (!str) {
+      return undefined;
+   }
+
+   return binToBytes(decToBin(str), little_endian);
+}
+
 export function hexToBytes(str: string, little_endian: boolean = true) {
    if (!str) {
       return undefined;

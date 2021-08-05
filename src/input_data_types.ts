@@ -116,3 +116,35 @@ export class InputDataTypeBin extends InputDataType {
         ]);
     }
 }
+
+export class InputDataTypeDec extends InputDataType {
+    parse(str: string) {
+        let regexes = [
+            '([0-9]+)',
+        ];
+
+        for (let regex of regexes) {
+            let re = new RegExp('^' + regex + '$');
+            let match = re.exec(str);
+            if (match) {
+                return match[1];
+            }
+        }
+    }
+
+    convert(str: string) {
+        return converters.decToBytes(str);
+    }
+
+    getFormsMap() {
+        return createFormsMap([
+            'binary',
+            'chars',
+            'float16',
+            'float32',
+            'float64',
+            'hexadecimal',
+            'size',
+        ]);
+    }
+}
