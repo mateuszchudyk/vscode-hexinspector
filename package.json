@@ -32,7 +32,7 @@
 			"properties": {
 				"hexinspector.hoverContent": {
 					"type": "array",
-					"default": ["decimal", "size", "binary", "hexadecimal", "float16", "float32", "float64", "chars"]
+					"default": ["decimal", "hexadecimal", "binary", "float16", "float32", "float64", "chars", "size"]
 				},
 				"hexinspector.endianness": {
 					"type": "boolean",
