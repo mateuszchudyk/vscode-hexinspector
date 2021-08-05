@@ -11,7 +11,7 @@
 			"name": "string.quoted"
 		},
 		{
-			"match": "(0x|0b|)[ 0-9]+\\(|\\)",
+			"match": "(0x|#|0b|)[ 0-9a-f]+\\(|\\)",
 			"name": "constant.numeric"
 		},
 		{
