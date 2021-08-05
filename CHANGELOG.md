@@ -1,5 +1,15 @@
 # Change Log
 
+## [1.1.0] (2021-08-06)
+
+### Added
+- Support for binary inputs
+- Support for decimal inputs
+- Support for customization of the hover content
+
+### Fixed
+- Fix color of the input's length on the hover
+
 ## [1.0.1] (2019-07-13)
 
 ### Added
@@ -47,6 +57,7 @@ Display a hover with following conversions of the pointed hexadecimal value:
 
 
 
+[1.1.0]: https://github.com/mateuszchudyk/vscode-hexinspector/compare/v1.0.1...v1.1.0
 [1.0.1]: https://github.com/mateuszchudyk/vscode-hexinspector/compare/v1.0.0...v1.0.1
 [1.0.0]: https://github.com/mateuszchudyk/vscode-hexinspector/compare/v0.0.3...v1.0.0
 [0.0.3]: https://github.com/mateuszchudyk/vscode-hexinspector/compare/v0.0.2...v0.0.3
