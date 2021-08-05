@@ -302,5 +302,8 @@ export function bytesToSize(bytes: Uint8Array) {
       left = '0';
    }
 
+   if (prefix_index == 0)
+      right = '';
+
    return left + right + ' ' + prefixes[prefix_index] + 'B';
 }

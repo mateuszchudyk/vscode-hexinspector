@@ -142,8 +142,8 @@ suite('Converters Tests', function () {
     });
 
     test('bytesToSize', function() {
-        assert.strictEqual(converters.bytesToSize(new Uint8Array([0])), '0.000 B');
-        assert.strictEqual(converters.bytesToSize(new Uint8Array([0x23, 0x01])), '291.000 B');
+        assert.strictEqual(converters.bytesToSize(new Uint8Array([0])), '0 B');
+        assert.strictEqual(converters.bytesToSize(new Uint8Array([0x23, 0x01])), '291 B');
         assert.strictEqual(converters.bytesToSize(new Uint8Array([0x34, 0x12])), '4.551 KiB');
         assert.strictEqual(converters.bytesToSize(new Uint8Array([0x56, 0x34, 0x12])), '1.138 MiB');
         assert.strictEqual(converters.bytesToSize(new Uint8Array([0x78, 0x56, 0x34, 0x12])), '291.271 MiB');
