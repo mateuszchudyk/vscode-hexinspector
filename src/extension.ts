@@ -1,7 +1,7 @@
 'use strict';
 
 import * as vscode from 'vscode';
-import * as input_data_types from './input_data_types';
+import * as input_handlers from './input_handlers';
 
 export function activate(context: vscode.ExtensionContext) {
     var hover = vscode.languages.registerHoverProvider({scheme: '*', language: '*'}, {
@@ -13,15 +13,19 @@ export function activate(context: vscode.ExtensionContext) {
             let littleEndian: boolean = vscode.workspace.getConfiguration('hexinspector').get('endianness');
 
             let bytes: Uint8Array;
-            let formsMap : input_data_types.MapFormToFunction;
+            let formsMap : input_handlers.MapFormToFunction;
 
             for (let inputDataType of inputDataTypes) {
-                let parsed = input_data_types.createInputDataTypeHandler(inputDataType).parse(word);
+                let inputHandler = input_handlers.createInputHandler(inputDataType);
+                if (!inputHandler)
+                    continue;
+
+                let parsed = inputHandler.parse(word);
                 if (!parsed)
                     continue;
 
-                bytes = input_data_types.createInputDataTypeHandler(inputDataType).convert(parsed);
-                formsMap = input_data_types.createInputDataTypeHandler(inputDataType).getFormsMap();
+                bytes = inputHandler.convert(parsed);
+                formsMap = inputHandler.getFormsMap();
             }
 
             let formMaxLength = 0;

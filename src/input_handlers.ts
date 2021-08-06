@@ -46,13 +46,13 @@ export type MapFormToFunction = {
     [name: string]: (bytes: Uint8Array) => string
 };
 
-export abstract class InputDataType {
+export abstract class InputHandler {
     abstract parse(str: string) : string;
     abstract convert(str: string) : Uint8Array;
     abstract getFormsMap() : MapFormToFunction;
 }
 
-export class InputDataTypeHex extends InputDataType {
+export class InputHandlerHex extends InputHandler {
     parse(str: string) {
         let regexes = [
             '0x([0-9a-fA-F]+)(?:[uU])?(?:[lL])?(?:[lL])?',
@@ -85,7 +85,7 @@ export class InputDataTypeHex extends InputDataType {
     }
 }
 
-export class InputDataTypeBin extends InputDataType {
+export class InputHandlerBin extends InputHandler {
     parse(str: string) {
         let regexes = [
             '0b([0-1]+)',
@@ -117,7 +117,7 @@ export class InputDataTypeBin extends InputDataType {
     }
 }
 
-export class InputDataTypeDec extends InputDataType {
+export class InputHandlerDec extends InputHandler {
     parse(str: string) {
         let regexes = [
             '([0-9]+)(?:[uU])?(?:[lL])?(?:[lL])?',
@@ -149,11 +149,11 @@ export class InputDataTypeDec extends InputDataType {
     }
 }
 
-export function createInputDataTypeHandler(name: string) {
+export function createInputHandler(name: string) {
     let map = {
-        "hexadecimal" : new InputDataTypeHex,
-        "binary"      : new InputDataTypeBin,
-        "decimal"     : new InputDataTypeDec,
+        "hexadecimal" : new InputHandlerHex,
+        "binary"      : new InputHandlerBin,
+        "decimal"     : new InputHandlerDec,
     };
 
     return map[name];

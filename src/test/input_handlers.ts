@@ -1,11 +1,11 @@
 'use strict';
 
 import * as assert from 'assert';
-import * as input_data_types from '../input_data_types';
+import * as input_handler from '../input_handlers';
 
-suite('Input Data Types Tests', function () {
-    test('InputDataTypeHex (parse)', function() {
-        let inputDataType = new input_data_types.InputDataTypeHex();
+suite('Input Handler Tests', function () {
+    test('InputHandlerHex (parse)', function() {
+        let inputDataType = new input_handler.InputHandlerHex();
 
         assert.strictEqual(inputDataType.parse(''), undefined);
         assert.strictEqual(inputDataType.parse('0x'), undefined);
@@ -21,14 +21,14 @@ suite('Input Data Types Tests', function () {
         assert.strictEqual(inputDataType.parse('0xdeadULL'), 'dead');
     });
 
-    test('InputDataTypeHex (getFormsMap)', function() {
-        let formsMap = new input_data_types.InputDataTypeHex().getFormsMap();
+    test('InputHandlerHex (getFormsMap)', function() {
+        let formsMap = new input_handler.InputHandlerHex().getFormsMap();
 
         assert.ok(!('hexadecimal' in formsMap));
     });
 
-    test('InputDataTypeBin (parse)', function() {
-        let inputDataType = new input_data_types.InputDataTypeBin();
+    test('InputHandlerBin (parse)', function() {
+        let inputDataType = new input_handler.InputHandlerBin();
 
         assert.strictEqual(inputDataType.parse(''), undefined);
         assert.strictEqual(inputDataType.parse('0b'), undefined);
@@ -38,14 +38,14 @@ suite('Input Data Types Tests', function () {
         assert.strictEqual(inputDataType.parse('0b01'), '01');
     });
 
-    test('InputDataTypeBin (getFormsMap)', function() {
-        let formsMap = new input_data_types.InputDataTypeBin().getFormsMap();
+    test('InputHandlerBin (getFormsMap)', function() {
+        let formsMap = new input_handler.InputHandlerBin().getFormsMap();
 
         assert.ok(!('binary' in formsMap));
     });
 
-    test('InputDataTypeDec (parse)', function() {
-        let inputDataType = new input_data_types.InputDataTypeDec();
+    test('InputHandlerDec (parse)', function() {
+        let inputDataType = new input_handler.InputHandlerDec();
 
         assert.strictEqual(inputDataType.parse(''), undefined);
         assert.strictEqual(inputDataType.parse('0123456789'), '0123456789');
@@ -59,8 +59,8 @@ suite('Input Data Types Tests', function () {
         assert.strictEqual(inputDataType.parse('1234ULL'), '1234');
     });
 
-    test('InputDataTypeDec (getFormsMap)', function() {
-        let formsMap = new input_data_types.InputDataTypeDec().getFormsMap();
+    test('InputHandlerDec (getFormsMap)', function() {
+        let formsMap = new input_handler.InputHandlerDec().getFormsMap();
 
         assert.ok(!('decimal' in formsMap));
     });
