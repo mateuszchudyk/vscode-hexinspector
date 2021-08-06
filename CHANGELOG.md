@@ -1,6 +1,6 @@
 # Change Log
 
-## [1.1.0] (2021-08-06)
+## [1.1.0] (2021-08-05)
 
 ### Added
 - Support for binary inputs
