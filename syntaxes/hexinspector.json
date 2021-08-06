@@ -2,21 +2,52 @@
 	"scopeName": "source.hexinspector",
 	"fileTypes": [ "hexinspector" ],
 	"patterns": [
-		{
+		{ "include": "#title" },
+		{ "include": "#input-value" },
+		{ "include": "#input-lenght" },
+		{ "include": "#output-form-label" },
+		{ "include": "#endiannes" }
+	],
+	"repository": {
+		"title" : {
 			"match": "HexInspector:",
 			"name": "markup.heading.1.html"
 		},
-		{
-			"match": "(Little Endian|Big Endian|[0-9]+B)",
-			"name": "string.quoted"
+		"input-value": {
+			"patterns": [
+				{ "include": "#input-value-hexadecimal" },
+				{ "include": "#input-value-binary" },
+				{ "include": "#input-value-decimal" },
+				{ "include": "#input-value-right-parenthesis" }
+			]
 		},
-		{
-			"match": "(0x|#|0b|)[ 0-9a-f]+\\(|\\)",
+		"input-value-hexadecimal": {
+			"match": "(0x|#)[0-9a-f]+\\ \\(",
 			"name": "constant.numeric"
 		},
-		{
+		"input-value-binary": {
+			"match": "0b[0-1]+\\ \\(",
+			"name": "constant.numeric"
+		},
+		"input-value-decimal": {
+			"match": "[0-9]+\\ \\(",
+			"name": "constant.numeric"
+		},
+		"input-value-right-parenthesis": {
+			"match": "\\)",
+			"name": "constant.numeric"
+		},
+		"input-length": {
+			"match": "[0-9]+B",
+			"name": "string.quoted"
+		},
+		"output-form-label": {
 			"match": "(Decimal|Size|Binary|Hexadecimal|Float16|Float32|Float64|Chars)",
 			"name": "keyword.other"
+		},
+		"endiannes": {
+			"match": "(Little Endian|Big Endian|[0-9]+B)",
+			"name": "string.quoted"
 		}
-	]
+	}
 }
