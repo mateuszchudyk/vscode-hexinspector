@@ -15,7 +15,7 @@
 - binary if it starts with `0b` (e.g. `0b101`),
 - decimal if it is contains only digits.
 
-The extension supports both `Little-Endian` and `Big-Endian` byte order. You can choose endianness in settings. The order of displayed forms is also customizable.
+The extension supports both `Little-Endian` and `Big-Endian` byte order. You can choose endianness in settings. The order of displayed forms and input types that trigger the hover can be also set in settings.
 
 Extension is available on the [Marketplace].
 

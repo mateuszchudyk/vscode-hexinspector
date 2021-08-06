@@ -1,5 +1,15 @@
 # Change Log
 
+## [1.2.0] (2021-08-10)
+
+### Added
+- Support for C/C++ integer literals (u/l/ll/ul/ull) for decimal input values
+- Setting to select what input data types trigger the hover
+
+### Fixed
+- Fix coloring hexadecimal inputs
+- Fix adding separator to a number
+
 ## [1.1.0] (2021-08-05)
 
 ### Added
@@ -57,6 +67,7 @@ Display a hover with following conversions of the pointed hexadecimal value:
 
 
 
+[1.2.0]: https://github.com/mateuszchudyk/vscode-hexinspector/compare/v1.1.0...v1.2.0
 [1.1.0]: https://github.com/mateuszchudyk/vscode-hexinspector/compare/v1.0.1...v1.1.0
 [1.0.1]: https://github.com/mateuszchudyk/vscode-hexinspector/compare/v1.0.0...v1.0.1
 [1.0.0]: https://github.com/mateuszchudyk/vscode-hexinspector/compare/v0.0.3...v1.0.0
