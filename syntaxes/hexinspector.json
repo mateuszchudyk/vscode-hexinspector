@@ -42,7 +42,7 @@
 			"name": "string.quoted"
 		},
 		"output-form-label": {
-			"match": "(Decimal|Size|Binary|Hexadecimal|Float16|Float32|Float64|Chars)",
+			"match": "(Decimal|Size|Binary|Hexadecimal|Float16|Float32|Float64|Chars|:)",
 			"name": "keyword.other"
 		},
 		"endiannes": {
