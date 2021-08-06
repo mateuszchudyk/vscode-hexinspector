@@ -8,25 +8,20 @@ export function activate(context: vscode.ExtensionContext) {
         provideHover(document, position, token) {
             var word = document.getText(document.getWordRangeAtPosition(position));
 
+            let inputDataTypes: string[] = vscode.workspace.getConfiguration('hexinspector').get('inputDataTypes');
             let forms: string[] = vscode.workspace.getConfiguration('hexinspector').get('hoverContent');
             let littleEndian: boolean = vscode.workspace.getConfiguration('hexinspector').get('endianness');
-
-            let inputDataTypes: input_data_types.InputDataType[] = [
-                new input_data_types.InputDataTypeHex,
-                new input_data_types.InputDataTypeBin,
-                new input_data_types.InputDataTypeDec,
-            ];
 
             let bytes: Uint8Array;
             let formsMap : input_data_types.MapFormToFunction;
 
             for (let inputDataType of inputDataTypes) {
-                let parsed = inputDataType.parse(word);
+                let parsed = input_data_types.createInputDataTypeHandler(inputDataType).parse(word);
                 if (!parsed)
                     continue;
 
-                bytes = inputDataType.convert(parsed);
-                formsMap = inputDataType.getFormsMap();
+                bytes = input_data_types.createInputDataTypeHandler(inputDataType).convert(parsed);
+                formsMap = input_data_types.createInputDataTypeHandler(inputDataType).getFormsMap();
             }
 
             let formMaxLength = 0;

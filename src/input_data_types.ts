@@ -148,3 +148,13 @@ export class InputDataTypeDec extends InputDataType {
         ]);
     }
 }
+
+export function createInputDataTypeHandler(name: string) {
+    let map = {
+        "hexadecimal" : new InputDataTypeHex,
+        "binary"      : new InputDataTypeBin,
+        "decimal"     : new InputDataTypeDec,
+    };
+
+    return map[name];
+}
