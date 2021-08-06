@@ -1,7 +1,7 @@
 {
 	"name": "hexinspector",
 	"displayName": "HexInspector",
-	"description": "Provides fast and easy way to peek other forms of a hexadecimal value",
+	"description": "Provides fast and easy way to peek other forms of a hexadecimal/decimal/binary value",
 	"version": "1.1.0",
 	"publisher": "mateuszchudyk",
 	"license": "MIT",
