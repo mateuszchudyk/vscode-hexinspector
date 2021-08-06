@@ -22,7 +22,7 @@
 			]
 		},
 		"input-value-hexadecimal": {
-			"match": "(0x|#)[0-9a-f]+\\ \\(",
+			"match": "(0x|#)[0-9a-fA-F]+[^ ]*\\ \\(",
 			"name": "constant.numeric"
 		},
 		"input-value-binary": {
