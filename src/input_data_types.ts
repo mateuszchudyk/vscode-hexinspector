@@ -120,7 +120,7 @@ export class InputDataTypeBin extends InputDataType {
 export class InputDataTypeDec extends InputDataType {
     parse(str: string) {
         let regexes = [
-            '([0-9]+)',
+            '([0-9]+)(?:[uU])?(?:[lL])?(?:[lL])?',
         ];
 
         for (let regex of regexes) {

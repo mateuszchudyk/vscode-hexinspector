@@ -30,7 +30,7 @@
 			"name": "constant.numeric"
 		},
 		"input-value-decimal": {
-			"match": "[0-9]+\\ \\(",
+			"match": "[0-9]+[^ ]*\\ \\(",
 			"name": "constant.numeric"
 		},
 		"input-value-right-parenthesis": {
