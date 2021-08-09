@@ -34,7 +34,7 @@ suite('Input Handler Tests', function () {
         assert.strictEqual(inputDataType.parse('0b'), undefined);
         assert.strictEqual(inputDataType.parse('01'), undefined);
         assert.strictEqual(inputDataType.parse('0b0'), '0');
-        assert.strictEqual(inputDataType.parse('0b1'), '0');
+        assert.strictEqual(inputDataType.parse('0b1'), '1');
         assert.strictEqual(inputDataType.parse('0b01'), '01');
     });
 
