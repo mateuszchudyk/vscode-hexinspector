@@ -1,34 +1,24 @@
 'use strict';
 
 import * as converters from './converters';
-
-function addSeparatorToNumber(str: string, sep: string, n: number) {
-    var result = '';
-    for (let i = 0; i < str.length; i++) {
-        if (i > 0 && i % n == 0) {
-            result = sep + result;
-        }
-        result = str[str.length - 1 - i] + result;
-    }
-    return result;
- }
+import * as utils from './utils';
 
 function createFormsMap(forms: string[]) {
     let availableFormsMap = {
         'binary'      : function(bytes: Uint8Array) {
-            return addSeparatorToNumber(converters.bytesToBin(bytes), ' ', 8);
+            return utils.addSeparatorToNumber(converters.bytesToBin(bytes), ' ', 8);
         },
         'chars'       : converters.bytesToStr,
         'decimal'     : function(bytes: Uint8Array) {
-            let asUnsigned = addSeparatorToNumber(converters.bytesToUnsignedDec(bytes), ',', 3);
-            let asSigned = addSeparatorToNumber(converters.bytesToSignedDec(bytes),  ',', 3);
+            let asUnsigned = utils.addSeparatorToNumber(converters.bytesToUnsignedDec(bytes), ',', 3);
+            let asSigned = utils.addSeparatorToNumber(converters.bytesToSignedDec(bytes),  ',', 3);
             return asUnsigned + (asSigned != asUnsigned ? ' / ' + asSigned : '');
         },
         'float16'     : converters.bytesToFloat16,
         'float32'     : converters.bytesToFloat32,
         'float64'     : converters.bytesToFloat64,
         'hexadecimal' : function(bytes: Uint8Array) {
-            return addSeparatorToNumber(converters.bytesToHex(bytes), ' ', 2);
+            return utils.addSeparatorToNumber(converters.bytesToHex(bytes), ' ', 2);
         },
         'size'        : converters.bytesToSize,
     };
