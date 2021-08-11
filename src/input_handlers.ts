@@ -6,21 +6,21 @@ import * as utils from './utils';
 function createFormsMap(forms: string[]) {
     let availableFormsMap = {
         'binary'      : function(bytes: Uint8Array) {
-            return utils.addSeparatorToNumber(converters.bytesToBin(bytes), ' ', 8);
+            return utils.addSeparatorToNumber(converters.toBinary(bytes), ' ', 8);
         },
-        'chars'       : converters.bytesToStr,
+        'chars'       : converters.toCharacters,
         'decimal'     : function(bytes: Uint8Array) {
-            let asUnsigned = utils.addSeparatorToNumber(converters.bytesToUnsignedDec(bytes), ',', 3);
-            let asSigned = utils.addSeparatorToNumber(converters.bytesToSignedDec(bytes),  ',', 3);
+            let asUnsigned = utils.addSeparatorToNumber(converters.toDecimalUnsigned(bytes), ',', 3);
+            let asSigned = utils.addSeparatorToNumber(converters.toDecimalSigned(bytes),  ',', 3);
             return asUnsigned + (asSigned != asUnsigned ? ' / ' + asSigned : '');
         },
-        'float16'     : converters.bytesToFloat16,
-        'float32'     : converters.bytesToFloat32,
-        'float64'     : converters.bytesToFloat64,
+        'float16'     : converters.toFloat16,
+        'float32'     : converters.toFloat32,
+        'float64'     : converters.toFloat64,
         'hexadecimal' : function(bytes: Uint8Array) {
-            return utils.addSeparatorToNumber(converters.bytesToHex(bytes), ' ', 2);
+            return utils.addSeparatorToNumber(converters.toHexadecimal(bytes), ' ', 2);
         },
-        'size'        : converters.bytesToSize,
+        'size'        : converters.toSize,
     };
 
     let result = {};
@@ -59,7 +59,7 @@ export class InputHandlerHex extends InputHandler {
     }
 
     convert(str: string) {
-        return converters.hexToBytes(str);
+        return converters.fromHexadecimal(str);
     }
 
     getFormsMap() {
@@ -91,7 +91,7 @@ export class InputHandlerBin extends InputHandler {
     }
 
     convert(str: string) {
-        return converters.binToBytes(str);
+        return converters.fromBinary(str);
     }
 
     getFormsMap() {
@@ -123,7 +123,7 @@ export class InputHandlerDec extends InputHandler {
     }
 
     convert(str: string) {
-        return converters.decToBytes(str);
+        return converters.fromDecimal(str);
     }
 
     getFormsMap() {

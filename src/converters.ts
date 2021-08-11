@@ -11,9 +11,9 @@ function switchEndian(bytes: Uint8Array) {
 }
 
 //
-// convert to bytes
+// From XXX
 //
-export function binToBytes(str: string, little_endian: boolean = true) {
+export function fromBinary(str: string, little_endian: boolean = true) {
    if (!str) {
       return undefined;
    }
@@ -60,15 +60,15 @@ function decToBin(str: string) {
    return result;
 }
 
-export function decToBytes(str: string, little_endian: boolean = true) {
+export function fromDecimal(str: string, little_endian: boolean = true) {
    if (!str) {
       return undefined;
    }
 
-   return binToBytes(decToBin(str), little_endian);
+   return fromBinary(decToBin(str), little_endian);
 }
 
-export function hexToBytes(str: string, little_endian: boolean = true) {
+export function fromHexadecimal(str: string, little_endian: boolean = true) {
    if (!str) {
       return undefined;
    }
@@ -86,9 +86,9 @@ export function hexToBytes(str: string, little_endian: boolean = true) {
 }
 
 //
-// convert from bytes
+// To XXX
 //
-export function bytesToUnsignedDec(bytes: Uint8Array) {
+export function toDecimalUnsigned(bytes: Uint8Array) {
    if (bytes.length == 0) {
       return '';
    }
@@ -139,7 +139,7 @@ export function bytesToUnsignedDec(bytes: Uint8Array) {
    return result;
 }
 
-export function bytesToSignedDec(bytes: Uint8Array) {
+export function toDecimalSigned(bytes: Uint8Array) {
    if (bytes.length == 0) {
       return '';
    }
@@ -151,10 +151,10 @@ export function bytesToSignedDec(bytes: Uint8Array) {
 
    let sign = copy[copy.length - 1] >> 7;
    copy[copy.length - 1] &= 0x7f;
-   return (sign ? '-' : '') + bytesToUnsignedDec(copy);
+   return (sign ? '-' : '') + toDecimalUnsigned(copy);
 }
 
-export function bytesToBin(bytes: Uint8Array) {
+export function toBinary(bytes: Uint8Array) {
    var result = '';
    for (const byte of bytes) {
       for (let i = 0; i < 8; i++) {
@@ -164,7 +164,7 @@ export function bytesToBin(bytes: Uint8Array) {
    return result;
 }
 
-export function bytesToHex(bytes: Uint8Array) {
+export function toHexadecimal(bytes: Uint8Array) {
    var result = '';
    for (const byte of bytes) {
       result = ('0' + byte.toString(16)).slice(-2) + result;
@@ -172,7 +172,7 @@ export function bytesToHex(bytes: Uint8Array) {
    return result;
 }
 
-export function bytesToFloat16(bytes: Uint8Array) {
+export function toFloat16(bytes: Uint8Array) {
    if (bytes.length > 2 || bytes.length == 0) {
       return '';
    }
@@ -202,7 +202,7 @@ export function bytesToFloat16(bytes: Uint8Array) {
    }
 }
 
-export function bytesToFloat32(bytes: Uint8Array) {
+export function toFloat32(bytes: Uint8Array) {
    if (bytes.length > 4 || bytes.length == 0) {
       return '';
    }
@@ -237,7 +237,7 @@ export function bytesToFloat32(bytes: Uint8Array) {
    }
 }
 
-export function bytesToFloat64(bytes: Uint8Array) {
+export function toFloat64(bytes: Uint8Array) {
    if (bytes.length > 8 || bytes.length == 0) {
       return '';
    }
@@ -277,7 +277,7 @@ export function bytesToFloat64(bytes: Uint8Array) {
    }
 }
 
-export function bytesToStr(bytes: Uint8Array) {
+export function toCharacters(bytes: Uint8Array) {
    var result = '';
    for (const byte of bytes) {
       result = String.fromCharCode(byte) + result;
@@ -314,7 +314,7 @@ function shiftBytes(bytes: Uint8Array, shift: number) {
    return result;
 }
 
-export function bytesToSize(bytes: Uint8Array) {
+export function toSize(bytes: Uint8Array) {
    let prefixes = ['', 'Ki', 'Mi', 'Gi', 'Ti', 'Pi', 'Ei', 'Zi', 'Yi'];
    let bits = countBits(bytes);
    let prefix_index = Math.min(prefixes.length - 1, Math.trunc(bits / 10));
@@ -332,7 +332,7 @@ export function bytesToSize(bytes: Uint8Array) {
       shifted_bytes = shifted_bytes.slice(2);
    }
 
-   let left = bytesToUnsignedDec(shifted_bytes);
+   let left = toDecimalUnsigned(shifted_bytes);
    if (left == '') {
       left = '0';
    }
