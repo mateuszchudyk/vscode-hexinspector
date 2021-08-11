@@ -36,13 +36,77 @@ export type MapFormToFunction = {
     [name: string]: (bytes: Uint8Array) => string
 };
 
-export abstract class InputHandler {
+abstract class InputHandler {
     abstract parse(str: string) : string;
     abstract convert(str: string) : Uint8Array;
     abstract getFormsMap() : MapFormToFunction;
 }
 
-export class InputHandlerHex extends InputHandler {
+class InputHandlerBinary extends InputHandler {
+    parse(str: string) {
+        let regexes = [
+            '0b([0-1]+)',
+        ];
+
+        for (let regex of regexes) {
+            let re = new RegExp('^' + regex + '$');
+            let match = re.exec(str);
+            if (match) {
+                return match[1];
+            }
+        }
+    }
+
+    convert(str: string) {
+        return converters.fromBinary(str);
+    }
+
+    getFormsMap() {
+        return createFormsMap([
+            'chars',
+            'decimal',
+            'float16',
+            'float32',
+            'float64',
+            'hexadecimal',
+            'size',
+        ]);
+    }
+}
+
+class InputHandlerDecimal extends InputHandler {
+    parse(str: string) {
+        let regexes = [
+            '([0-9]+)(?:[uU])?(?:[lL])?(?:[lL])?',
+        ];
+
+        for (let regex of regexes) {
+            let re = new RegExp('^' + regex + '$');
+            let match = re.exec(str);
+            if (match) {
+                return match[1];
+            }
+        }
+    }
+
+    convert(str: string) {
+        return converters.fromDecimal(str);
+    }
+
+    getFormsMap() {
+        return createFormsMap([
+            'binary',
+            'chars',
+            'float16',
+            'float32',
+            'float64',
+            'hexadecimal',
+            'size',
+        ]);
+    }
+}
+
+class InputHandlerHexadecimal extends InputHandler {
     parse(str: string) {
         let regexes = [
             '0x([0-9a-fA-F]+)(?:[uU])?(?:[lL])?(?:[lL])?',
@@ -75,75 +139,11 @@ export class InputHandlerHex extends InputHandler {
     }
 }
 
-export class InputHandlerBin extends InputHandler {
-    parse(str: string) {
-        let regexes = [
-            '0b([0-1]+)',
-        ];
-
-        for (let regex of regexes) {
-            let re = new RegExp('^' + regex + '$');
-            let match = re.exec(str);
-            if (match) {
-                return match[1];
-            }
-        }
-    }
-
-    convert(str: string) {
-        return converters.fromBinary(str);
-    }
-
-    getFormsMap() {
-        return createFormsMap([
-            'chars',
-            'decimal',
-            'float16',
-            'float32',
-            'float64',
-            'hexadecimal',
-            'size',
-        ]);
-    }
-}
-
-export class InputHandlerDec extends InputHandler {
-    parse(str: string) {
-        let regexes = [
-            '([0-9]+)(?:[uU])?(?:[lL])?(?:[lL])?',
-        ];
-
-        for (let regex of regexes) {
-            let re = new RegExp('^' + regex + '$');
-            let match = re.exec(str);
-            if (match) {
-                return match[1];
-            }
-        }
-    }
-
-    convert(str: string) {
-        return converters.fromDecimal(str);
-    }
-
-    getFormsMap() {
-        return createFormsMap([
-            'binary',
-            'chars',
-            'float16',
-            'float32',
-            'float64',
-            'hexadecimal',
-            'size',
-        ]);
-    }
-}
-
 export function createInputHandler(name: string) {
     let map = {
-        "hexadecimal" : new InputHandlerHex,
-        "binary"      : new InputHandlerBin,
-        "decimal"     : new InputHandlerDec,
+        'binary'      : new InputHandlerBinary,
+        'decimal'     : new InputHandlerDecimal,
+        'hexadecimal' : new InputHandlerHexadecimal,
     };
 
     return map[name];
