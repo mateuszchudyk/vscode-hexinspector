@@ -15,22 +15,12 @@
 		},
 		"input-value": {
 			"patterns": [
-				{ "include": "#input-value-hexadecimal" },
-				{ "include": "#input-value-binary" },
-				{ "include": "#input-value-decimal" },
+				{ "include": "#input-value-and-left-parenthesis" },
 				{ "include": "#input-value-right-parenthesis" }
 			]
 		},
-		"input-value-hexadecimal": {
-			"match": "(0x|#)[0-9a-fA-F]+[^ ]*\\ \\(",
-			"name": "constant.numeric"
-		},
-		"input-value-binary": {
-			"match": "0b[0-1]+\\ \\(",
-			"name": "constant.numeric"
-		},
-		"input-value-decimal": {
-			"match": "[0-9]+[^ ]*\\ \\(",
+		"input-value-and-left-parenthesis": {
+			"match": ".*\\(",
 			"name": "constant.numeric"
 		},
 		"input-value-right-parenthesis": {
