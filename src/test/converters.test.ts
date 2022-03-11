@@ -161,7 +161,7 @@ suite('Converters Tests', function () {
 
     test('toCharacters', function() {
         assert.strictEqual(converters.toCharacters(new Uint8Array([])), '');
-        assert.strictEqual(converters.toCharacters(new Uint8Array([0x30, 0x39, 0x20, 0x41, 0x5a, 0x20, 0x61, 0x7a])), 'za ZA 90');
+        assert.strictEqual(converters.toCharacters(new Uint8Array([0x7a, 0x61, 0x20, 0x5a, 0x41, 0x20, 0x39, 0x30])), 'za ZA 90');
     });
 
     test('toSize', function() {

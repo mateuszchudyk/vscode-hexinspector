@@ -270,7 +270,7 @@ export function toFloat64(bytes: Uint8Array) {
 export function toCharacters(bytes: Uint8Array) {
    var result = '';
    for (const byte of bytes) {
-      result = String.fromCharCode(byte) + result;
+      result += String.fromCharCode(byte);
    }
    return result;
 }
