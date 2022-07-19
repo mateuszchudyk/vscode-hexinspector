@@ -159,9 +159,9 @@ suite('Converters Tests', function () {
         assert.strictEqual(converters.toFloat64(new Uint8Array([0x01, 0x00, 0x00, 0x00, 0x00, 0x00, 0xf0, 0x7f])), 'NaN');
     });
 
-    test('toCharacters', function() {
-        assert.strictEqual(converters.toCharacters(new Uint8Array([])), '');
-        assert.strictEqual(converters.toCharacters(new Uint8Array([0x7a, 0x61, 0x20, 0x5a, 0x41, 0x20, 0x39, 0x30])), 'za ZA 90');
+    test('toAscii', function() {
+        assert.strictEqual(converters.toAscii(new Uint8Array([])), '');
+        assert.strictEqual(converters.toAscii(new Uint8Array([0x7a, 0x61, 0x20, 0x5a, 0x41, 0x20, 0x39, 0x30])), 'za ZA 90');
     });
 
     test('toSize', function() {

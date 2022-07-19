@@ -29,7 +29,7 @@ Extension is available on the [Marketplace].
 | Float16 (IEEE 754) | Only if a alue has at most 2 bytes.  |                                                        |
 | Float32 (IEEE 754) | Only if a value has at most 4 bytes. |                                                        |
 | Float64 (IEEE 754) | Only if a value has at most 8 bytes. |                                                        |
-| Chars              | Always.                              | Sequence of characters                                 |
+| Ascii              | Always.                              | Sequence of characters                                 |
 | Size               | Always.                              | With 3 decimal places if unit is more than byte.       |
 | Bits set           | Always.                              | List of set bits.                                      |
 

@@ -8,7 +8,7 @@ function createFormsMap(forms: string[]) {
         'binary'      : function(bytes: Uint8Array) {
             return utils.addSeparatorToNumber(converters.toBinary(bytes), ' ', 8);
         },
-        'chars'       : converters.toCharacters,
+        'ascii'       : converters.toAscii,
         'decimal'     : function(bytes: Uint8Array) {
             let asUnsigned = utils.addSeparatorToNumber(converters.toDecimalUnsigned(bytes), ',', 3);
             let asSigned = utils.addSeparatorToNumber(converters.toDecimalSigned(bytes),  ',', 3);
@@ -64,7 +64,7 @@ class InputHandlerBinary extends InputHandler {
 
     getFormsMap() {
         return createFormsMap([
-            'chars',
+            'ascii',
             'decimal',
             'float16',
             'float32',
@@ -97,8 +97,8 @@ class InputHandlerDecimal extends InputHandler {
 
     getFormsMap() {
         return createFormsMap([
+            'ascii',
             'binary',
-            'chars',
             'float16',
             'float32',
             'float64',
@@ -131,8 +131,8 @@ class InputHandlerHexadecimal extends InputHandler {
 
     getFormsMap() {
         return createFormsMap([
+            'ascii',
             'binary',
-            'chars',
             'decimal',
             'float16',
             'float32',
