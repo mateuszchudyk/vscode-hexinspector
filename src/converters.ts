@@ -303,3 +303,17 @@ export function toSize(bytes: Uint8Array) {
 
    return left + right + ' ' + prefixes[prefix_index] + 'B';
 }
+
+export function toBitSet(bytes: Uint8Array) {
+   let result = '';
+   let bit_no = 0;
+   for (const byte of bytes) {
+      for (let i = 0; i < 8; i++) {
+         if ((byte >> i) & 1) {
+            result += (result != '' ? ', ' : '') + bit_no;
+         }
+         bit_no += 1;
+      }
+   }
+   return result;
+}

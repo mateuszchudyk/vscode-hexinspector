@@ -21,6 +21,7 @@ function createFormsMap(forms: string[]) {
             return utils.addSeparatorToNumber(converters.toHexadecimal(bytes), ' ', 2);
         },
         'size'        : converters.toSize,
+        'bits set'      : converters.toBitSet,
     };
 
     let result = {};
@@ -70,6 +71,7 @@ class InputHandlerBinary extends InputHandler {
             'float64',
             'hexadecimal',
             'size',
+            'bits set',
         ]);
     }
 }
@@ -102,6 +104,7 @@ class InputHandlerDecimal extends InputHandler {
             'float64',
             'hexadecimal',
             'size',
+            'bits set',
         ]);
     }
 }
@@ -135,6 +138,7 @@ class InputHandlerHexadecimal extends InputHandler {
             'float32',
             'float64',
             'size',
+            'bits set',
         ]);
     }
 }

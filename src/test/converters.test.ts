@@ -179,4 +179,11 @@ suite('Converters Tests', function () {
         assert.strictEqual(converters.toSize(new Uint8Array([0xa0, 0xcb, 0xed, 0xff, 0xde, 0xbc, 0x9a, 0x78, 0x56, 0x34, 0x12])), '18.204 YiB');
         assert.strictEqual(converters.toSize(new Uint8Array([0xdf, 0x59, 0x37, 0x5f])), '1.488 GiB');
     });
+
+    test('toBitSet', function() {
+        assert.strictEqual(converters.toBitSet(new Uint8Array([])), '');
+        assert.strictEqual(converters.toBitSet(new Uint8Array([0x01])), '0');
+        assert.strictEqual(converters.toBitSet(new Uint8Array([0x01, 0x02])), '0, 9');
+        assert.strictEqual(converters.toBitSet(new Uint8Array([0x12, 0x34, 0xfc])), '1, 4, 10, 12, 13, 18, 19, 20, 21, 22, 23');
+    });
 });
