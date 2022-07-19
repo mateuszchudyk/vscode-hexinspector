@@ -1,7 +1,7 @@
 import * as utils from './utils';
 
 //
-// From XXX
+// From X to bytes.
 //
 export function fromBinary(str: string, little_endian: boolean = true) {
    if (!str) {
@@ -76,7 +76,7 @@ export function fromHexadecimal(str: string, little_endian: boolean = true) {
 }
 
 //
-// To XXX
+// From bytes to X.
 //
 export function toDecimalUnsigned(bytes: Uint8Array) {
    if (bytes.length == 0) {
