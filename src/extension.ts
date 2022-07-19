@@ -12,6 +12,10 @@ export function activate(context: vscode.ExtensionContext) {
             let forms: string[] = vscode.workspace.getConfiguration('hexinspector').get('hoverContent');
             let littleEndian: boolean = vscode.workspace.getConfiguration('hexinspector').get('endianness');
 
+            if (inputDataTypes.length == 0 || forms.length == 0) {
+                return undefined;
+            }
+
             let bytes: Uint8Array;
             let formsMap : input_handlers.MapFormToFunction;
 
@@ -57,7 +61,9 @@ export function activate(context: vscode.ExtensionContext) {
         }
     });
 
-    context.subscriptions.push(hover);
+    if (hover) {
+        context.subscriptions.push(hover);
+    }
 }
 
 export function deactivate() {}
