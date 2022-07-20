@@ -1,5 +1,16 @@
 # Change Log
 
+## [1.4.0] (2022-07-21)
+
+### Added
+- New output form - list of set bits
+
+### Changed
+- Rename Chars to Ascii
+
+### Fixed
+- Don't show hover if there're no any form to display or no input data type is accepted
+
 ## [1.3.0] (2022-03-11)
 
 ### Fixed
@@ -72,6 +83,7 @@ Display a hover with following conversions of the pointed hexadecimal value:
 
 
 
+[1.4.0]: https://github.com/mateuszchudyk/vscode-hexinspector/compare/v1.3.0...v1.4.0
 [1.3.0]: https://github.com/mateuszchudyk/vscode-hexinspector/compare/v1.2.0...v1.3.0
 [1.2.0]: https://github.com/mateuszchudyk/vscode-hexinspector/compare/v1.1.0...v1.2.0
 [1.1.0]: https://github.com/mateuszchudyk/vscode-hexinspector/compare/v1.0.1...v1.1.0
