@@ -14,6 +14,8 @@
 
 Extension is available on the [Marketplace].
 
+## Screenshot
+
 <img src='images/screenshot.png'>
 
 ## Settings
@@ -36,9 +38,9 @@ Default values are bolded.
   | **"binary"**          | Binary nuber with leading zeros.                                                       |
   | "bits set"            | List of set bits.                                                                      |
   | **"decimal"**         | Decimal number as unsigned/signed. Signed is displayed only if the highest bit is set. |
-  | **"float16"**         | Float16 (IEEE 754). Displayed only if a value has at most 2 bytes.                     |
+  | "float16"             | Float16 (IEEE 754). Displayed only if a value has at most 2 bytes.                     |
   | **"float32"**         | Float16 (IEEE 754). Displayed only if a value has at most 4 bytes.                     |
-  | **"float64"**         | Float16 (IEEE 754). Displayed only if a value has at most 8 bytes.                     |
+  | "float64"             | Float16 (IEEE 754). Displayed only if a value has at most 8 bytes.                     |
   | **"hexadecimal"**     | Hexadecimal number with leading zeros.                                                 |
   | **"size"**            | Size with 3 decimal places (if a unit is bigger than byte).                            |
 

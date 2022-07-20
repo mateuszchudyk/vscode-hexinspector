@@ -36,7 +36,7 @@
 				},
 				"hexinspector.hoverContent": {
 					"type": "array",
-					"default": ["decimal", "hexadecimal", "binary", "float16", "float32", "float64", "ascii", "size"]
+					"default": ["decimal", "hexadecimal", "binary", "float32", "ascii", "size"]
 				},
 				"hexinspector.endianness": {
 					"type": "boolean",
