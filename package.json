@@ -32,11 +32,22 @@
 			"properties": {
 				"hexinspector.inputDataTypes": {
 					"type": "array",
-					"default": ["hexadecimal", "binary", "decimal"]
+					"default": [
+						"hexadecimal",
+						"binary",
+						"decimal"
+					]
 				},
 				"hexinspector.hoverContent": {
 					"type": "array",
-					"default": ["decimal", "hexadecimal", "binary", "float32", "ascii", "size"]
+					"default": [
+						"decimal",
+						"hexadecimal",
+						"binary",
+						"float32",
+						"ascii",
+						"size"
+					]
 				},
 				"hexinspector.endianness": {
 					"type": "boolean",
