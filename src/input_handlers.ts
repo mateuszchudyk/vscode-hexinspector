@@ -39,7 +39,7 @@ export type MapFormToFunction = {
 
 abstract class InputHandler {
     abstract parse(str: string) : string;
-    abstract convert(str: string, little_endian : boolean) : Uint8Array;
+    abstract convert(str: string, isLittleEndian : boolean) : Uint8Array;
     abstract getFormsMap() : MapFormToFunction;
 }
 
@@ -58,8 +58,8 @@ class InputHandlerBinary extends InputHandler {
         }
     }
 
-    convert(str: string, little_endian : boolean) {
-        return converters.fromBinary(str, little_endian);
+    convert(str: string, isLittleEndian : boolean) {
+        return converters.fromBinary(str, isLittleEndian);
     }
 
     getFormsMap() {
@@ -91,8 +91,8 @@ class InputHandlerDecimal extends InputHandler {
         }
     }
 
-    convert(str: string, little_endian : boolean) {
-        return converters.fromDecimal(str, little_endian);
+    convert(str: string, isLittleEndian : boolean) {
+        return converters.fromDecimal(str, isLittleEndian);
     }
 
     getFormsMap() {
@@ -125,8 +125,8 @@ class InputHandlerHexadecimal extends InputHandler {
         }
     }
 
-    convert(str: string, little_endian : boolean) {
-        return converters.fromHexadecimal(str, little_endian);
+    convert(str: string, isLittleEndian : boolean) {
+        return converters.fromHexadecimal(str, isLittleEndian);
     }
 
     getFormsMap() {

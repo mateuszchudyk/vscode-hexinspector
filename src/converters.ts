@@ -3,7 +3,7 @@ import * as utils from './utils';
 //
 // From X to bytes.
 //
-export function fromBinary(str: string, little_endian: boolean) {
+export function fromBinary(str: string, isLittleEndian: boolean) {
    if (!str) {
       return undefined;
    }
@@ -17,7 +17,7 @@ export function fromBinary(str: string, little_endian: boolean) {
       }
    }
 
-   if (!little_endian) {
+   if (!isLittleEndian) {
       result = utils.switchEndian(result);
    }
    return result;
@@ -50,15 +50,15 @@ function decToBin(str: string) {
    return result;
 }
 
-export function fromDecimal(str: string, little_endian: boolean) {
+export function fromDecimal(str: string, isLittleEndian: boolean) {
    if (!str) {
       return undefined;
    }
 
-   return fromBinary(decToBin(str), little_endian);
+   return fromBinary(decToBin(str), isLittleEndian);
 }
 
-export function fromHexadecimal(str: string, little_endian: boolean) {
+export function fromHexadecimal(str: string, isLittleEndian: boolean) {
    if (!str) {
       return undefined;
    }
@@ -69,7 +69,7 @@ export function fromHexadecimal(str: string, little_endian: boolean) {
       result[i] = parseInt(str[2 * i], 16) + (2 * i + 1 < str.length ? 16 * parseInt(str[2 * i + 1], 16) : 0);
    }
 
-   if (!little_endian) {
+   if (!isLittleEndian) {
       result = utils.switchEndian(result);
    }
    return result;
