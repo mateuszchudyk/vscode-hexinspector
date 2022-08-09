@@ -3,7 +3,7 @@ import * as utils from './utils';
 //
 // From X to bytes.
 //
-export function fromBinary(str: string, little_endian: boolean = true) {
+export function fromBinary(str: string, little_endian: boolean) {
    if (!str) {
       return undefined;
    }
@@ -50,7 +50,7 @@ function decToBin(str: string) {
    return result;
 }
 
-export function fromDecimal(str: string, little_endian: boolean = true) {
+export function fromDecimal(str: string, little_endian: boolean) {
    if (!str) {
       return undefined;
    }
@@ -58,7 +58,7 @@ export function fromDecimal(str: string, little_endian: boolean = true) {
    return fromBinary(decToBin(str), little_endian);
 }
 
-export function fromHexadecimal(str: string, little_endian: boolean = true) {
+export function fromHexadecimal(str: string, little_endian: boolean) {
    if (!str) {
       return undefined;
    }

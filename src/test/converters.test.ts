@@ -3,17 +3,17 @@ import * as converters from '../converters';
 
 suite('Converters Tests', function () {
     test('fromBinary', function() {
-        assert.strictEqual(converters.fromBinary(''), undefined);
-        assert.deepStrictEqual(converters.fromBinary('0'), new Uint8Array([0x00]));
-        assert.deepStrictEqual(converters.fromBinary('1'), new Uint8Array([0x01]));
-        assert.deepStrictEqual(converters.fromBinary('00'), new Uint8Array([0x00]));
-        assert.deepStrictEqual(converters.fromBinary('01'), new Uint8Array([0x01]));
-        assert.deepStrictEqual(converters.fromBinary('10'), new Uint8Array([0x02]));
-        assert.deepStrictEqual(converters.fromBinary('10001000'), new Uint8Array([0x88]));
-        assert.deepStrictEqual(converters.fromBinary('1000100000010001'), new Uint8Array([0x11, 0x88]));
-        assert.deepStrictEqual(converters.fromBinary('1011111110111111011000'), new Uint8Array([0xd8, 0xef, 0x2f]));
+        assert.strictEqual(converters.fromBinary('', true), undefined);
+        assert.deepStrictEqual(converters.fromBinary('0', true), new Uint8Array([0x00]));
+        assert.deepStrictEqual(converters.fromBinary('1', true), new Uint8Array([0x01]));
+        assert.deepStrictEqual(converters.fromBinary('00', true), new Uint8Array([0x00]));
+        assert.deepStrictEqual(converters.fromBinary('01', true), new Uint8Array([0x01]));
+        assert.deepStrictEqual(converters.fromBinary('10', true), new Uint8Array([0x02]));
+        assert.deepStrictEqual(converters.fromBinary('10001000', true), new Uint8Array([0x88]));
+        assert.deepStrictEqual(converters.fromBinary('1000100000010001', true), new Uint8Array([0x11, 0x88]));
+        assert.deepStrictEqual(converters.fromBinary('1011111110111111011000', true), new Uint8Array([0xd8, 0xef, 0x2f]));
 
-        assert.strictEqual(converters.fromBinary(''), undefined);
+        assert.strictEqual(converters.fromBinary('', false), undefined);
         assert.deepStrictEqual(converters.fromBinary('0', false), new Uint8Array([0x00]));
         assert.deepStrictEqual(converters.fromBinary('1', false), new Uint8Array([0x01]));
         assert.deepStrictEqual(converters.fromBinary('00', false), new Uint8Array([0x00]));
@@ -25,16 +25,16 @@ suite('Converters Tests', function () {
     });
 
     test('fromDecimal', function() {
-        assert.strictEqual(converters.fromDecimal(''), undefined);
-        assert.deepStrictEqual(converters.fromDecimal('0'), new Uint8Array([0x00]));
-        assert.deepStrictEqual(converters.fromDecimal('1'), new Uint8Array([0x01]));
-        assert.deepStrictEqual(converters.fromDecimal('00'), new Uint8Array([0x00]));
-        assert.deepStrictEqual(converters.fromDecimal('12'), new Uint8Array([0x0c]));
-        assert.deepStrictEqual(converters.fromDecimal('42'), new Uint8Array([0x2a]));
-        assert.deepStrictEqual(converters.fromDecimal('255'), new Uint8Array([0xff]));
-        assert.deepStrictEqual(converters.fromDecimal('256'), new Uint8Array([0x00, 0x01]));
-        assert.deepStrictEqual(converters.fromDecimal('257'), new Uint8Array([0x01, 0x01]));
-        assert.deepStrictEqual(converters.fromDecimal('3141592'), new Uint8Array([0xd8, 0xef, 0x2f]));
+        assert.strictEqual(converters.fromDecimal('', true), undefined);
+        assert.deepStrictEqual(converters.fromDecimal('0', true), new Uint8Array([0x00]));
+        assert.deepStrictEqual(converters.fromDecimal('1', true), new Uint8Array([0x01]));
+        assert.deepStrictEqual(converters.fromDecimal('00', true), new Uint8Array([0x00]));
+        assert.deepStrictEqual(converters.fromDecimal('12', true), new Uint8Array([0x0c]));
+        assert.deepStrictEqual(converters.fromDecimal('42', true), new Uint8Array([0x2a]));
+        assert.deepStrictEqual(converters.fromDecimal('255', true), new Uint8Array([0xff]));
+        assert.deepStrictEqual(converters.fromDecimal('256', true), new Uint8Array([0x00, 0x01]));
+        assert.deepStrictEqual(converters.fromDecimal('257', true), new Uint8Array([0x01, 0x01]));
+        assert.deepStrictEqual(converters.fromDecimal('3141592', true), new Uint8Array([0xd8, 0xef, 0x2f]));
 
         assert.strictEqual(converters.fromDecimal('', false), undefined);
         assert.deepStrictEqual(converters.fromDecimal('0', false), new Uint8Array([0x00]));
@@ -49,15 +49,15 @@ suite('Converters Tests', function () {
     });
 
     test('fromHexadecimal', function() {
-        assert.strictEqual(converters.fromHexadecimal(''), undefined);
-        assert.deepStrictEqual(converters.fromHexadecimal('0'), new Uint8Array([0x00]));
-        assert.deepStrictEqual(converters.fromHexadecimal('1'), new Uint8Array([0x01]));
-        assert.deepStrictEqual(converters.fromHexadecimal('7f'), new Uint8Array([0x7f]));
-        assert.deepStrictEqual(converters.fromHexadecimal('ff'), new Uint8Array([0xff]));
-        assert.deepStrictEqual(converters.fromHexadecimal('123'), new Uint8Array([0x23, 0x01]));
-        assert.deepStrictEqual(converters.fromHexadecimal('1234'), new Uint8Array([0x34, 0x12]));
-        assert.deepStrictEqual(converters.fromHexadecimal('12345678'), new Uint8Array([0x78, 0x56, 0x34, 0x12]));
-        assert.deepStrictEqual(converters.fromHexadecimal('123456789abcdef0'), new Uint8Array([0xf0, 0xde, 0xbc, 0x9a, 0x78, 0x56, 0x34, 0x12]));
+        assert.strictEqual(converters.fromHexadecimal('', true), undefined);
+        assert.deepStrictEqual(converters.fromHexadecimal('0', true), new Uint8Array([0x00]));
+        assert.deepStrictEqual(converters.fromHexadecimal('1', true), new Uint8Array([0x01]));
+        assert.deepStrictEqual(converters.fromHexadecimal('7f', true), new Uint8Array([0x7f]));
+        assert.deepStrictEqual(converters.fromHexadecimal('ff', true), new Uint8Array([0xff]));
+        assert.deepStrictEqual(converters.fromHexadecimal('123', true), new Uint8Array([0x23, 0x01]));
+        assert.deepStrictEqual(converters.fromHexadecimal('1234', true), new Uint8Array([0x34, 0x12]));
+        assert.deepStrictEqual(converters.fromHexadecimal('12345678', true), new Uint8Array([0x78, 0x56, 0x34, 0x12]));
+        assert.deepStrictEqual(converters.fromHexadecimal('123456789abcdef0', true), new Uint8Array([0xf0, 0xde, 0xbc, 0x9a, 0x78, 0x56, 0x34, 0x12]));
 
         assert.strictEqual(converters.fromHexadecimal('', false), undefined);
         assert.deepStrictEqual(converters.fromHexadecimal('0', false), new Uint8Array([0x00]));
