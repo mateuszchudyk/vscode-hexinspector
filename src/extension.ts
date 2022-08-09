@@ -10,7 +10,9 @@ export function activate(context: vscode.ExtensionContext) {
 
             let inputDataTypes: string[] = vscode.workspace.getConfiguration('hexinspector').get('inputDataTypes');
             let forms: string[] = vscode.workspace.getConfiguration('hexinspector').get('hoverContent');
-            let littleEndian: boolean = vscode.workspace.getConfiguration('hexinspector').get('endianness');
+            let endianness: string = vscode.workspace.getConfiguration('hexinspector').get('endianness');
+
+            endianness = endianness.charAt(0).toUpperCase() + endianness.slice(1).toLowerCase() + ' Endian';
 
             if (inputDataTypes.length == 0 || forms.length == 0) {
                 return undefined;
@@ -28,7 +30,7 @@ export function activate(context: vscode.ExtensionContext) {
                 if (!parsed)
                     continue;
 
-                bytes = inputHandler.convert(parsed, littleEndian);
+                bytes = inputHandler.convert(parsed, endianness == 'Little Endian');
                 formsMap = inputHandler.getFormsMap();
             }
 
@@ -40,8 +42,6 @@ export function activate(context: vscode.ExtensionContext) {
 
             if (bytes) {
                 let length = bytes.length;
-                let endianness = (littleEndian ? 'Little' : 'Big') + ' Endian';
-
                 let message = 'HexInspector: ' + word + ' (' + length + 'B)\n\n';
                 for (let form of forms) {
                     if (!(form in formsMap))

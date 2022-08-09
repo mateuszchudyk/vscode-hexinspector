@@ -45,10 +45,10 @@ Default values are bolded.
   | **"size"**            | Size with 3 decimal places (if a unit is bigger than byte).                            |
 
 - `hexinspector.endianness`
-   Indentifier     | Description   |
+  | Indentifier    | Description   |
   |----------------|---------------|
-  | **true**       | Little Endian |
-  | false          | Big Endian    |
+  | **little**     | Little Endian |
+  | **big**        | Big Endian    |
 
 
 ## License

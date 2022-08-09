@@ -50,9 +50,9 @@
 					]
 				},
 				"hexinspector.endianness": {
-					"type": "boolean",
-					"default": true,
-					"description": "Little Endian (true) or Big Endian (false)?"
+					"type": "string",
+					"default": "little",
+					"description": "Little Endian or Big Endian?"
 				}
 			}
 		},
