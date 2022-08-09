@@ -28,7 +28,7 @@ export function activate(context: vscode.ExtensionContext) {
                 if (!parsed)
                     continue;
 
-                bytes = inputHandler.convert(parsed);
+                bytes = inputHandler.convert(parsed, littleEndian);
                 formsMap = inputHandler.getFormsMap();
             }
 
