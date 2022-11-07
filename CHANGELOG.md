@@ -1,5 +1,10 @@
 # Change Log
 
+## [1.5.1] (2022-11-09)
+
+### Fixed
+- Problem with iterating over undefined
+
 ## [1.5.0] (2022-08-09)
 
 ### Changed
@@ -91,6 +96,7 @@ Display a hover with following conversions of the pointed hexadecimal value:
 
 
 
+[1.5.1]: https://github.com/mateuszchudyk/vscode-hexinspector/compare/v1.5.0...v1.5.1
 [1.5.0]: https://github.com/mateuszchudyk/vscode-hexinspector/compare/v1.4.0...v1.5.0
 [1.4.0]: https://github.com/mateuszchudyk/vscode-hexinspector/compare/v1.3.0...v1.4.0
 [1.3.0]: https://github.com/mateuszchudyk/vscode-hexinspector/compare/v1.2.0...v1.3.0

@@ -19,7 +19,7 @@ export function activate(context: vscode.ExtensionContext) {
             }
 
             let bytes: Uint8Array;
-            let formsMap : input_handlers.MapFormToFunction;
+            let formsMap: input_handlers.MapFormToFunction;
 
             for (let inputDataType of inputDataTypes) {
                 let inputHandler = input_handlers.createInputHandler(inputDataType);
@@ -34,13 +34,13 @@ export function activate(context: vscode.ExtensionContext) {
                 formsMap = inputHandler.getFormsMap();
             }
 
-            let formMaxLength = 0;
-            for (let form of forms) {
-                if (form in formsMap)
-                    formMaxLength = Math.max(formMaxLength, form.length);
-            }
-
             if (bytes) {
+                let formMaxLength = 0;
+                for (let form of forms) {
+                    if (form in formsMap)
+                        formMaxLength = Math.max(formMaxLength, form.length);
+                }
+
                 let length = bytes.length;
                 let message = 'HexInspector: ' + word + ' (' + length + 'B)\n\n';
                 for (let form of forms) {
