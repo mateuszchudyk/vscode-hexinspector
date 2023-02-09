@@ -81,7 +81,7 @@ class InputHandlerDecimal extends InputHandler {
     parse(str: string) {
         let regexes = [
             '([0-9]+)(?:[uU])?(?:[lL])?(?:[lL])?',
-            '\'d([0-9]+)(?:[uU])?(?:[lL])?(?:[lL])?',
+            '\'d([0-9]+)',
         ];
 
         for (let regex of regexes) {
@@ -116,7 +116,7 @@ class InputHandlerHexadecimal extends InputHandler {
         let regexes = [
             '0x([0-9a-fA-F]+)(?:[uU])?(?:[lL])?(?:[lL])?',
             '#([0-9a-fA-F]+)',
-            '\'h([0-9a-fA-F]+)(?:[uU])?(?:[lL])?(?:[lL])?',
+            '\'h([0-9a-fA-F]+)',
         ];
 
         for (let regex of regexes) {
